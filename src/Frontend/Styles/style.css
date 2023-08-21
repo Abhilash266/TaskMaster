@@ -1,0 +1,143 @@
+body{
+    margin: 0; 
+    padding: 0; 
+    background-color: #6D9AC4;
+    
+}
+.primaryButton{
+    background-color: #EE5684;
+    color: #fff;
+    margin: 10px 0 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    border-color: #EE5684;
+}
+
+/* Header Style */
+
+.headerStyle{
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    height: 6vh;
+}
+
+.headerContainer {
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+
+.circularContainer{
+    background: #EE5684;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    text-align: center;
+    
+}
+
+/* End Header Style */
+
+
+/* Cover Style */
+.coverContainer{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+#newCover{
+    background-color: #7a7a7a;
+    font-size: 6em;
+    text-align: center;
+    cursor: pointer;
+}
+.coverStyle{
+    background:#333;
+    color:white;
+    width:25vw;
+    border-radius: 10px;
+    padding:10px;
+    margin-bottom:10px
+}
+
+/* End Cover Style */
+
+
+/* Form Style */
+.signupContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+
+}
+.taskFormContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.signupStyle{
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 50px;
+}
+.primaryButton{
+    background-color: #EE5684;
+    color: #fff;
+    margin: 10px 0 10px 0;
+    padding: 8px;
+    border-radius: 5px;
+    border: 2px solid #EE5684;
+}
+.anchorStyle{
+    border:none;
+    background: none;
+    text-decoration: underline;
+}
+
+input, textarea{
+    border-radius: 10px;
+    border: 2px solid #6D9AC4;
+}
+
+
+input.input-error, select.input-error, textarea.input-error{
+    border-color: #fc8181;
+}
+.error{
+    margin-bottom: -25px;
+    font-size: 80%;
+    color:#fc8181;
+}
+/* End Form Style */
+
+
+/* Sidebar Style */
+
+
+.sideBarContainer{
+    display: flex;
+    flex-direction: column;
+    background-color: aliceblue;
+    height: calc(100vh - 6vh);
+    margin: auto;
+}
+.button4 {
+    margin-top: auto;
+    
+}
+#primaryButton{
+    background-color: #EE5684;
+    color: #fff;
+    border: none;
+    
+}
+.col-lg-2{
+    padding:0px;
+}
+.col-lg-10{
+    padding:15px;
+}
