@@ -12,6 +12,9 @@ import Home from './home';
 import Header from "./header";
 import Signup from './Forms/signup';
 import LoginForm from "./Forms/login";
+import { Route, Router} from "react-router";
+import { redirect } from "react-router";
+
 
 
 
@@ -97,6 +100,9 @@ const Main = () => {
         {
             isLoggedIn ? 
             <>
+            
+
+            
             <Home accountName={name}></Home>
             </>
              : 

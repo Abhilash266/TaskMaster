@@ -2,6 +2,7 @@ body{
     margin: 0; 
     padding: 0; 
     background-color: #6D9AC4;
+
     
 }
 .primaryButton{
@@ -22,20 +23,50 @@ body{
     height: 6vh;
 }
 
-.headerContainer {
-    display: flex;
-    justify-content: space-between;
-    
-}
-
+.dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .dropdown-menu li {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+  }
+  
+  .dropdown-menu li:last-child {
+    border-bottom: none;
+  }
+  
+  .dropdown-menu li:hover {
+    background-color: #f0f0f0;
+  }
+  
 
 .circularContainer{
     background: #EE5684;
     width: 40px;
     height: 40px;
-    border-radius: 50%;
-    text-align: center;
-    
+    border-radius: 50%;    
 }
 
 /* End Header Style */
@@ -49,7 +80,7 @@ body{
 }
 #newCover{
     background-color: #7a7a7a;
-    font-size: 6em;
+    font-size: 70px;
     text-align: center;
     cursor: pointer;
 }
@@ -57,6 +88,7 @@ body{
     background:#333;
     color:white;
     width:25vw;
+    border: 2px solid #fff;
     border-radius: 10px;
     padding:10px;
     margin-bottom:10px
@@ -122,22 +154,50 @@ input.input-error, select.input-error, textarea.input-error{
     display: flex;
     flex-direction: column;
     background-color: aliceblue;
-    height: calc(100vh - 6vh);
-    margin: auto;
+    height: 100vh;
+    position: relative;
+    left: 0; 
+    transition: width 0.4s ease-in-out; 
+    width: 100%;
+    border: 2px solid #fff;
+    background-color: #333;
+    border-radius: 10px;
+
+
 }
-.button4 {
-    margin-top: auto;
+.sideBarContainer.active {
+    width: 100%;
+    transition: width 0.4s ease-in-out; 
+    border-radius: 10px;
+    height: 100vh;
+  }
+
+#mainBar{
+    transition: width 0.4s ease-in-out; 
+}
+.button6active{
+    margin-top: auto !important;
+}
+.button6 {
+    margin-top: auto !important;
+}
     
-}
 #primaryButton{
     background-color: #EE5684;
     color: #fff;
-    border: none;
+    border: 2px solid #EE5684;
+    border-radius: 10px;
+    padding:10px;
+    margin: 10px;
     
 }
-.col-lg-2{
-    padding:0px;
+
+
+
+.col-lg-1#mainBar, .col-lg-2#mainBar, .col-lg-10#mainBar, .col-lg-11#mainBar{
+    padding-top: 10px;
 }
-.col-lg-10{
-    padding:15px;
+
+.icon{
+    font-size: 20px;
 }

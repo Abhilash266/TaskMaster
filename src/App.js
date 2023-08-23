@@ -20,6 +20,7 @@ class App extends React.Component {
       <>
       <Routes>
         <Route path="/" element={<Main />}></Route>
+        <Route component={"ErrorPage"} />
       </Routes>
       </>
     );

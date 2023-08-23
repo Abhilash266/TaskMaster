@@ -20,8 +20,8 @@ export const LoginSchema =  yup.object().shape({
 })
 
 export const TaskFormSchema = yup.object().shape({
-    Title: yup.string().required('Please enter a title').max(20, 'Title must not exceed 20 characters'),
-    Description: yup.string().required('Please enter a description').max(40, 'Description must not exceed 40 characters'),
+    Title: yup.string().required('Please enter a title').max(40, 'Title must not exceed 40 characters'),
+    Description: yup.string().required('Please enter a description').max(150, 'Description must not exceed 150 characters'),
     Priority: yup.string().required('Please select an option from the dropdown'),
     TaskDate: yup.date().nullable().required('Please select a date')
   });

@@ -4,6 +4,7 @@ import Cover from "./cover";
 import TaskForm from "./Forms/taskForm";
 import "../Styles/style.css"
 import Sidebar from "./sidebar";
+import EditProfile from "./Forms/editProfile";
 
 
 
@@ -18,8 +19,9 @@ const Home = (props) => {
     const [editTaskClicked, setEditTaskClicked] = useState(false)
     const [taskListClicked, setTaskListClicked] = useState(true)
     const [dashboardClicked, setDashboardClicked] = useState(false)
+    const [settingClicked, setSettingClicked] = useState(false)
 
-
+    
 
     const accountName = props.accountName
     
@@ -85,15 +87,17 @@ const Home = (props) => {
       } 
     }
 
-    const putHandler = async(formData) => {
+    const putHandler = async(taskData, index) => {
       try {
-        const data = {_id:_Id,results: formData}
-        const updateId = data._id
-        console.log(updateId, data)
-        const response = await axios.put(`/api/updateData/${updateId}`, data.results);
+        const id = data[index]._id
+        const finalData = await {_id:id,results: taskData}
+        const updateId = id
+        console.log(taskData,id)
+        
+        const response = await axios.put(`/api/updateData/${updateId}`, finalData.results);
         if (response){
           console.log(response)
-          await putObject(editId, data)
+          await putObject(index, finalData)
           
         }
       } catch (error) {
@@ -101,12 +105,12 @@ const Home = (props) => {
       } 
     }
 
-    const deleteHandler = async(event) => {
+    const deleteHandler = async(ind) => {
       try{
-        const deleteId = data[event.target.dataset.id]._id
+        const deleteId = data[ind]._id
         console.log(deleteId)
         await axios.delete(`/api/deleteData/${deleteId}`)
-        await deleteObject(event.target.dataset.id)
+        await deleteObject(ind)
       }
       catch(err){
         console.log("Not deleted")
@@ -117,7 +121,8 @@ const Home = (props) => {
     const getInfo = async(data,type) => {
       
       if (type === "Edit"){
-        await putHandler(data)
+        console.log(data)
+        await putHandler(data, editId)
         setEditTaskClicked(false)
         setTaskListClicked(true)
         
@@ -132,29 +137,30 @@ const Home = (props) => {
     }
 
 
-    const [_Id, set_Id] = useState()
+    
     const [editId, setEditId] = useState()
 
     const [title, setTitle] = useState()
     const [description, setDescription] = useState()
     const [priority, setPriority] = useState()
     const [taskDate, setTaskDate] = useState()
+    
    
 
-    const editHandler = (event) => {
-      setEditId(event.target.dataset.id)
-      set_Id(data[event.target.dataset.id]._id)
+    const editHandler = (ind) => {
+      setEditId(ind)
       
-
-      setTitle(data[event.target.dataset.id].results.Title)
-      setDescription(data[event.target.dataset.id].results.Description)
-      setPriority(data[event.target.dataset.id].results.Priority)
-      setTaskDate(data[event.target.dataset.id].results.TaskDate)
+      setTitle(data[ind].results.Title)
+      setDescription(data[ind].results.Description)
+      setPriority(data[ind].results.Priority)
+      setTaskDate(data[ind].results.TaskDate)
+      
       
       setDashboardClicked(false)
       setTaskListClicked(false)
       setCreateTaskClicked(false)
       setEditTaskClicked(true)
+      setSettingClicked(false)
     }
 
     const createButtonHandler = () => {
@@ -162,6 +168,7 @@ const Home = (props) => {
       setTaskListClicked(false)
       setCreateTaskClicked(true)
       setEditTaskClicked(false)
+      setSettingClicked(false)
       
     }
     const taskListHandler = () => {
@@ -169,6 +176,7 @@ const Home = (props) => {
       setTaskListClicked(true)
       setCreateTaskClicked(false)
       setEditTaskClicked(false)
+      setSettingClicked(false)
       
     }
     const dashboardHandler = () => {
@@ -176,6 +184,16 @@ const Home = (props) => {
       setTaskListClicked(false)
       setCreateTaskClicked(false)
       setEditTaskClicked(false)
+      setSettingClicked(false)
+    }
+
+    const settingHandler = () => {
+      setSettingClicked(true)
+      setDashboardClicked(false)
+      setTaskListClicked(false)
+      setCreateTaskClicked(false)
+      setEditTaskClicked(false)
+
     }
 
 
@@ -189,63 +207,111 @@ const Home = (props) => {
         setTaskListClicked(true)
     }
 
-    
-    
-    
+    const taskStateChanged = async(tState,ind) => {
+      
+      const copiedArray = data[ind].results
+      copiedArray.TaskState = tState
+      await putHandler(copiedArray, ind)
+     
+    }
+    const [toggleBar, setToggleBar] = useState(false)
+    const handleToggleBar = () => {
+      setToggleBar(!toggleBar)
+    }
    
     return (
         
         <div className="container-fluid">
             <div className="row">
             
-                <div className="col-lg-2 col-md-4 col-sm-12">
-                    <Sidebar createButton = {createButtonHandler} taskButton = {taskListHandler} dashboardButton = {dashboardHandler}></Sidebar>
+                <div className={`${toggleBar ? 'col-lg-1 col-md-1 col-sm-3' : 'col-lg-2 col-md-2 col-sm-4'}`} id="mainBar">
+                    <Sidebar createButton = {createButtonHandler} taskButton = {taskListHandler} settingButton = {settingHandler} 
+                    dashboardButton = {dashboardHandler} handleToggleBar = {handleToggleBar}></Sidebar>
                 </div>
               
                 {
-                    taskListClicked ?
-                    <div className="col-lg-10 col-md-8 col-sm-10">
+                    taskListClicked &&
+                    <div className={`${toggleBar ? 'col-lg-11 col-md-11 col-sm-9' : 'col-lg-10 col-md-10 col-sm-8'}`} id="mainBar">
                       <div className="coverContainer">
                     {data.map((item, ind) => (
                         item.results.AccountName === accountName ?
                         <div className="coverStyle" id={ind} key={ind}>
                             <div>
-                                <Cover title={item.results.Title} description={item.results.Description} priority={item.results.Priority} taskDate={item.results.TaskDate}></Cover>
-                                <button className="btn btn-sm btn-primary" data-id={ind} onClick={editHandler}>Edit</button>
-                                <button className="btn btn-sm btn-danger" data-id={ind} onClick={deleteHandler}>Delete</button> 
+                                <Cover index={ind} title={item.results.Title} description={item.results.Description} 
+                                priority={item.results.Priority} taskDate={item.results.TaskDate} 
+                                taskState = {item.results.TaskState} taskStateChanged = {taskStateChanged}
+                                editHandler={editHandler} deleteHandler={deleteHandler}></Cover>
                             </div>
                         </div>:""
                     ))}
                         <div className="coverStyle" id="newCover" onClick={createButtonHandler}>+</div>
                       </div>
-                </div> : ""
+                </div> 
                 }
                 
                 {
-                    createTaskClicked ?
-                    <div className="col-lg-10 col-md-8 col-sm-10">
+                    createTaskClicked &&
+                    <div className="col-lg-10 col-md-10 col-sm-8">
                       <div className="taskFormContainer">
                         <TaskForm accountName={accountName} getInfo = {getInfo} cancelButton = {cancelButtonHandler} type="Submit"></TaskForm>
                       </div>
-                    </div> : ""
+                    </div> 
                 }
                 
                 {
-                  editTaskClicked ?
-                  <div className="col-lg-10 col-md-8 col-sm-10">
+                  editTaskClicked &&
+                  <div className="col-lg-10 col-md-10 col-sm-8">
                     <div className="taskFormContainer">
                       <TaskForm accountName={accountName} getInfo = {getInfo} cancelButton = {cancelButtonHandler} title = {title} description = {description} priority = {priority} taskDate = {taskDate} type="Edit"></TaskForm>
                     </div>
-                  </div> : ""
+                  </div> 
                 }
                 
 
                 
                 {
-                  dashboardClicked ?
-                  <div className="col-lg-10 col-md-8 col-sm-6">
-                    <h3>Welcome to Dashboard</h3>
-                  </div> : ""
+                  dashboardClicked &&
+                  <div className="col-lg-10 col-md-10 col-sm-8">
+                    <div className="coverContainer">
+                      <div className="col-lg-5 col-md-4 col-sm-3">
+                        <h3>Current Tasks</h3>
+                    {data.map((item, ind) => (
+                        item.results.AccountName === accountName && item.results.TaskState === "Pending"?
+                        <div className="coverStyle" id={ind} key={ind}>
+                            <div>
+                                <Cover index={ind} title={item.results.Title}  
+                                priority={item.results.Priority} taskDate={item.results.TaskDate} 
+                                taskState = {item.results.TaskState} taskStateChanged = {taskStateChanged}
+                                editHandler={editHandler} deleteHandler={deleteHandler}></Cover>
+                            </div>
+                        </div>:""
+                    ))}
+                      </div>
+                      <div className="col-lg-5 col-md-4 col-sm-3">
+                      <h3>Completed Tasks</h3>
+                    {data.map((item, ind) => (
+                        item.results.AccountName === accountName && item.results.TaskState === "Completed"?
+                        <div className="coverStyle" id={ind} key={ind}>
+                            <div>
+                                <Cover index={ind} title={item.results.Title}  
+                                priority={item.results.Priority} taskDate={item.results.TaskDate} 
+                                taskState = {item.results.TaskState} taskStateChanged = {taskStateChanged}
+                                editHandler={editHandler} deleteHandler={deleteHandler}></Cover>
+                            </div>
+                        </div>:""
+                    ))}
+                      </div>
+                   
+                      
+                      </div>
+                  </div>
+                }
+
+                {
+                  settingClicked &&
+                  <div className="col-lg-10 col-md-10 col-sm-8">
+                    <EditProfile></EditProfile>
+                  </div> 
                 }
                 
 

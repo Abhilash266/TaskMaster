@@ -14,9 +14,11 @@ const TaskForm = (props) => {
     const description = props.description
     const taskDate = props.taskDate
     const priority = props.priority
+    
 
     const onSubmit = async(values) => {
         values.AccountName = accountName
+        values.TaskState = "Pending"
         await props.getInfo(values,type1)
         
     }
