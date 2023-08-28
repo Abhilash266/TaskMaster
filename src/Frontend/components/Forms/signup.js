@@ -2,14 +2,14 @@ import React from "react";
 import "../../Styles/style.css"
 import { useFormik } from "formik";
 import { SignupSchema } from "../../Schemas/formSchema";
-
+import userAccountImage from "../../../Backend/Images/img5.avif"
     
 
 const Signup = (props) => {
     
     
     const onSubmit = async(values, actions) => {
-        console.log(values)
+        values.Image = {userAccountImage}
         await props.getInfo(values,"Signup")
         
     };

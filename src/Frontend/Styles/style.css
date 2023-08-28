@@ -17,10 +17,14 @@ body{
 /* Header Style */
 
 .headerStyle{
-    background-color: #333;
     color: #fff;
     padding: 10px;
-    height: 6vh;
+}
+#logout{
+    text-align:end
+}
+#header.container-fluid{
+    background-color: #333;
 }
 
 .dropdown {
@@ -93,7 +97,14 @@ body{
     padding:10px;
     margin-bottom:10px
 }
-
+.coverStyle1{
+    background:#333;
+    color:white;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    padding:10px;
+    margin-bottom:10px
+}
 /* End Cover Style */
 
 
@@ -130,7 +141,7 @@ body{
     text-decoration: underline;
 }
 
-input, textarea{
+input, textarea, select{
     border-radius: 10px;
     border: 2px solid #6D9AC4;
 }
@@ -162,9 +173,11 @@ input.input-error, select.input-error, textarea.input-error{
     border: 2px solid #fff;
     background-color: #333;
     border-radius: 10px;
-
-
 }
+.selectedButton {
+    border:2px solid white !important;
+    
+  }
 .sideBarContainer.active {
     width: 100%;
     transition: width 0.4s ease-in-out; 
@@ -197,7 +210,31 @@ input.input-error, select.input-error, textarea.input-error{
 .col-lg-1#mainBar, .col-lg-2#mainBar, .col-lg-10#mainBar, .col-lg-11#mainBar{
     padding-top: 10px;
 }
+#taskFormContainer.col-lg-10 {
+    padding-top: 10px;
+}
+.createTaskContainer{
+    padding: 10px;
+}
 
 .icon{
     font-size: 20px;
 }
+
+.imgContainer{
+    text-align: right;
+}
+.imgContainer img{
+    border-radius: 10px;
+}
+/* End Sidebar style */
+
+
+/* Task Form style */
+
+input#Title, textarea#Description, select#Priority, input#TaskDate{
+    width:100%;
+}
+
+
+/* End Task Bar style */

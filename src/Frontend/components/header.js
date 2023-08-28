@@ -2,51 +2,59 @@ import React, { useState } from "react";
 import MyContext from "../createContext";
 import "../Styles/style.css"
 import { useContext } from "react";
-import "../Images/logo.png"
+
 
 
 
 
 const Header = (props) => {
     const value = useContext(MyContext)
-    const [isOpen, setIsOpen] = useState(false);
+    const image = props.userAccountImage
+
+    const circleStyle = {
+        width: "50px",
+        height: "50px",
+        borderRadius: "50%", 
+        backgroundImage: `url(${image})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        cursor:"pointer"
+      }
     
   
     return(
         <>
-        <header className="headerStyle">
-        
-        
-            {
-                
-                props.name ? 
-                <>
-               
-                
-                <h4 style={{float:"left"}}>Welcome {props.name}</h4>
-               
-               
-                </>
-                
-                : <h1>My Website</h1>
-                
-            }
+        <div className="container-fluid" id="header">
+            
+            <header className="headerStyle">
+
+            <div className="row">
+                <div className="col-lg-6">
+                    { props.name ? 
+                    <div className="row">
+                        <div className="col-lg-1">
+                            <div className="circleContainer" style={circleStyle} >
+
+                            </div>
+                            
+                        </div>
+                        <div className="col-lg-5">
+                            <h3>Welcome {props.name}</h3>
+                        </div>
+                    </div>
                     
+                    : <h3>My Website</h3> }
+                </div>
+                <div className="col-lg-6" id="logout">
+                    { value && <h3 onClick={props.click}>Logout</h3>}
+                </div>
+            </div>
+        
+            </header>
 
-            {
-                value ? 
-                
-                <h4 style={{float:"right"}} onClick={props.click}>Logout</h4> 
-                
-              
-                : ""
-            }
-
-             
-            
-            
-            
-        </header>
+            </div>
+        
+        
         </>
 
     )

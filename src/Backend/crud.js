@@ -84,8 +84,9 @@ const updateData = async(userId, data) => {
   catch(err){
     console.error(err)
   }
-
 }
+
+
 
 const deleteData = async(userId) => {
     try{

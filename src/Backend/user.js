@@ -1,4 +1,4 @@
-const { MongoClient } = require('mongodb');
+const { MongoClient, ObjectId } = require('mongodb');
 const bcrypt = require('bcrypt');
 
 
@@ -15,7 +15,7 @@ const checkLogin = async(email,password) => {
       const documents = await collection.find({Email:email}).toArray();
       const checkPassword = await bcrypt.compare(password,documents[0].Password)
       if(documents.length > 0 && checkPassword){
-        return [true,documents[0].Name]
+        return [true,documents[0].Name, documents[0].Image.userAccountImage, documents[0]._id]
       }
       else{
         return [false]
@@ -58,8 +58,29 @@ const checkLogin = async(email,password) => {
     
   }
 
+  const updateUserData = async(userId, name, image) => {
+    try{
+      console.log(userId, name, image)
+      const db = client.db(dbName);
+      const collection = db.collection('UserData');
+      const filter = { _id: new ObjectId(userId) };
+      const update = {
+        $set:  {
+          Name: name,
+          Image: { userAccountImage: image }
+        }
+        
+      };
+      await collection.updateOne(filter, update)
+    }
+    catch(err){
+      console.error(err)
+    }
+  }
+
 
   module.exports = {
     checkLogin,
-    signUpHandler
+    signUpHandler,
+    updateUserData
   };

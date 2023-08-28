@@ -6,6 +6,7 @@ import "../Styles/style.css"
 import Sidebar from "./sidebar";
 import EditProfile from "./Forms/editProfile";
 
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 
 
 
@@ -21,6 +22,8 @@ const Home = (props) => {
     const [dashboardClicked, setDashboardClicked] = useState(false)
     const [settingClicked, setSettingClicked] = useState(false)
 
+    const [currentTasks, setCurrentTasks] = useState()
+    const [completedtasks, setCompletedTasks] = useState()
     
 
     const accountName = props.accountName
@@ -218,6 +221,24 @@ const Home = (props) => {
     const handleToggleBar = () => {
       setToggleBar(!toggleBar)
     }
+
+    
+
+  const handleDragEnd = (result) => {
+    if (!result.destination) return;
+    const ind = result.source.index
+    if (data[ind].results.TaskState === "Pending"){
+      taskStateChanged("Completed",ind)
+    }
+    else{
+      taskStateChanged("Pending",ind)
+    }
+
+    
+   
+  
+  };
+
    
     return (
         
@@ -226,7 +247,7 @@ const Home = (props) => {
             
                 <div className={`${toggleBar ? 'col-lg-1 col-md-1 col-sm-3' : 'col-lg-2 col-md-2 col-sm-4'}`} id="mainBar">
                     <Sidebar createButton = {createButtonHandler} taskButton = {taskListHandler} settingButton = {settingHandler} 
-                    dashboardButton = {dashboardHandler} handleToggleBar = {handleToggleBar}></Sidebar>
+                    dashboardButton = {dashboardHandler} handleToggleBar = {handleToggleBar} ></Sidebar>
                 </div>
               
                 {
@@ -251,7 +272,7 @@ const Home = (props) => {
                 
                 {
                     createTaskClicked &&
-                    <div className="col-lg-10 col-md-10 col-sm-8">
+                    <div className="col-lg-10 col-md-10 col-sm-8" id="taskFormContainer">
                       <div className="taskFormContainer">
                         <TaskForm accountName={accountName} getInfo = {getInfo} cancelButton = {cancelButtonHandler} type="Submit"></TaskForm>
                       </div>
@@ -260,8 +281,8 @@ const Home = (props) => {
                 
                 {
                   editTaskClicked &&
-                  <div className="col-lg-10 col-md-10 col-sm-8">
-                    <div className="taskFormContainer">
+                  <div className="col-lg-10 col-md-10 col-sm-8" id="taskFormContainer">
+                    <div className="taskFormContainer" >
                       <TaskForm accountName={accountName} getInfo = {getInfo} cancelButton = {cancelButtonHandler} title = {title} description = {description} priority = {priority} taskDate = {taskDate} type="Edit"></TaskForm>
                     </div>
                   </div> 
@@ -272,55 +293,98 @@ const Home = (props) => {
                 {
                   dashboardClicked &&
                   <div className="col-lg-10 col-md-10 col-sm-8">
+                    
                     <div className="coverContainer">
+                    <DragDropContext onDragEnd={handleDragEnd}>
                       <div className="col-lg-5 col-md-4 col-sm-3">
-                        <h3>Current Tasks</h3>
-                    {data.map((item, ind) => (
-                        item.results.AccountName === accountName && item.results.TaskState === "Pending"?
-                        <div className="coverStyle" id={ind} key={ind}>
-                            <div>
-                                <Cover index={ind} title={item.results.Title}  
-                                priority={item.results.Priority} taskDate={item.results.TaskDate} 
-                                taskState = {item.results.TaskState} taskStateChanged = {taskStateChanged}
-                                editHandler={editHandler} deleteHandler={deleteHandler}></Cover>
-                            </div>
-                        </div>:""
-                    ))}
+                        <Droppable droppableId="1">
+                        {(provided, snapshot) => (
+                          <div ref={provided.innerRef} {...provided.droppableProps} isDraggingOver={snapshot.isDraggingOver}>
+                                    {data.map((item, ind) => (
+                                      item.results.TaskState === "Pending" &&
+                                      <Draggable draggableId={`${ind}`} key={ind} index={ind}>
+                                          {(provided, snapshot) => (
+                                            <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} isDragging={snapshot.isDragging}>
+                                              <div className="coverStyle" id={ind} key={ind}>
+                                                  <div>
+                                                      <Cover index={ind} title={item.results.Title} description={item.results.Description} 
+                                                      priority={item.results.Priority} taskDate={item.results.TaskDate} 
+                                                      taskState = {item.results.TaskState} taskStateChanged = {taskStateChanged}
+                                                      editHandler={editHandler} deleteHandler={deleteHandler}></Cover>
+                                                  </div>
+                                              </div>
+                                              
+                                              {provided.placeholder}
+                                            </div>
+                                          )}
+                                      </Draggable>
+                                      ))}
+
+                          </div>
+                          )}
+                        </Droppable>
                       </div>
+
+
+
                       <div className="col-lg-5 col-md-4 col-sm-3">
-                      <h3>Completed Tasks</h3>
-                    {data.map((item, ind) => (
-                        item.results.AccountName === accountName && item.results.TaskState === "Completed"?
-                        <div className="coverStyle" id={ind} key={ind}>
-                            <div>
-                                <Cover index={ind} title={item.results.Title}  
-                                priority={item.results.Priority} taskDate={item.results.TaskDate} 
-                                taskState = {item.results.TaskState} taskStateChanged = {taskStateChanged}
-                                editHandler={editHandler} deleteHandler={deleteHandler}></Cover>
-                            </div>
-                        </div>:""
-                    ))}
+                        <Droppable droppableId="2">
+                        {(provided, snapshot) => (
+                          <div ref={provided.innerRef} {...provided.droppableProps} isDraggingOver={snapshot.isDraggingOver}>
+                                    {data.map((item, ind) => (
+                                      item.results.TaskState === "Completed" &&
+                                      <Draggable draggableId={`${ind}`} key={ind} index={ind}>
+                                          {(provided, snapshot) => (
+                                            <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} isDragging={snapshot.isDragging}>
+                                              <div className="coverStyle" id={ind} key={ind}>
+                                                  <div>
+                                                      <Cover index={ind} title={item.results.Title} description={item.results.Description} 
+                                                      priority={item.results.Priority} taskDate={item.results.TaskDate} 
+                                                      taskState = {item.results.TaskState} taskStateChanged = {taskStateChanged}
+                                                      editHandler={editHandler} deleteHandler={deleteHandler}></Cover>
+                                                  </div>
+                                              </div>
+                                              
+                                              {provided.placeholder}
+                                            </div>
+                                          )}
+                                      </Draggable>
+                                      ))}
+
+                          </div>
+                          )}
+                        </Droppable>
                       </div>
+
+
+
+
+
+
+                      </DragDropContext>
                    
                       
-                      </div>
+                    </div>
+                      
                   </div>
                 }
 
                 {
                   settingClicked &&
                   <div className="col-lg-10 col-md-10 col-sm-8">
-                    <EditProfile></EditProfile>
+                    <EditProfile name = {props.accountName} userAccountImage = {props.userAccountImage} userAccountId = {props.userAccountId}></EditProfile>
                   </div> 
                 }
                 
 
                 
             </div>
-           
+          
         </div>
         
+        
     )
+    
 }
 
 

@@ -5,6 +5,17 @@ const Cover = (props) => {
     const [isChecked, setIsChecked] = useState(false)
     const [taskState, setTaskState] = useState(props.taskState)
     
+    const day = props.taskDate.split("-")
+    const date = day[2]
+    const month = day[1]
+    const year = day[0]
+    
+    const monthText = {
+        "01":"Jan", "02":"Feb", "03":"Mar", "04":"Apr", "05":"May",
+        "06":"Jun", "07":"July", "08":"Aug", "09":"Sept", "10":"Oct",
+        "11":"Nov","12":"Dec",
+    }
+    
     const stateStyle = {
         float: "right",
         background:"#fff",
@@ -70,12 +81,20 @@ const Cover = (props) => {
 
             <div className="row">
                 
-                <div className="col-lg-4">
-                    <h5>{props.taskDate}</h5>
+                <div className="col-lg-3">
+                    <div className="row">
+                        <div col-lg-12>
+                            <h5>{month}-{monthText[month]}</h5>
+                        </div>
+                        <div col-lg-12>
+                        <h5>{year}</h5>
+                        </div>
+                    </div>
+                    
                 </div>
                 
                 
-                <div className="col-lg-8">
+                <div className="col-lg-9">
                 <div style={{borderLeft:"2px solid white", paddingLeft:"10px"}}>
                     <h5>{props.title}</h5>
                     <h6>{props.description}</h6>

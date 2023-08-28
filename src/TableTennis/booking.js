@@ -33,24 +33,24 @@ async function autoLogin() {
     
     // Request form
     await page.waitForSelector('.request-form');
-    await page.waitForTimeout(5000);
+    await page.waitForTimeout(2000);
     // Add Message
     await page.waitForSelector('textarea[aria-label="Describe your service request"]');
     await page.type('textarea[aria-label="Describe your service request"]', 'fob number: 32939 Please give access to game room (Table Tennis).');
     console.log('Textarea filled!');
-    await page.waitForTimeout(5000);
+    await page.waitForTimeout(2000);
     
     // Choose category
     await page.waitForSelector('select#category');
     await page.select('select#category', '57f8ce95-3ecb-4edd-8d75-872565a863f6');
     console.log('Category selected!');
-    await page.waitForTimeout(5000);
+    await page.waitForTimeout(2000);
     
     // Choose sub-category
     await page.waitForSelector('select#subcategory');
     await page.select('select#subcategory', '3d93ecb1-ea09-49f8-a8ef-c582c9c088be');
     console.log('SubCategory selected!');
-    await page.waitForTimeout(5000);
+    await page.waitForTimeout(2000);
   
     // Submit Request
     await page.waitForSelector('button[aria-label="Submit Request"]');

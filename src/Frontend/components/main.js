@@ -12,8 +12,7 @@ import Home from './home';
 import Header from "./header";
 import Signup from './Forms/signup';
 import LoginForm from "./Forms/login";
-import { Route, Router} from "react-router";
-import { redirect } from "react-router";
+
 
 
 
@@ -25,14 +24,20 @@ const Main = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [signup, setSignUp] = useState(true)
     const [name, setName] = useState("")
+    const [userAccountImage, setUserAccountImage] = useState("")
+    const [userId, setUserId] = useState("")
     const [invalidPasswordMsg, setInvalidPasswordMsg] = useState("")
    
     useEffect(()=>{
       const token = localStorage.getItem('token')
       const name = localStorage.getItem('name')
+      const image = localStorage.getItem('userImage')
+      const userId = localStorage.getItem('userId')
       if (token && name) {
         setIsLoggedIn(true);
         setName(name)
+        setUserAccountImage(image)
+        setUserId(userId)
       }
     },[])
 
@@ -53,13 +58,17 @@ const Main = () => {
             Email : email,
             Password: password
           })
-      
+          console.log(userData)
           if(userData.data[0] === true){
             const token = userData.headers.authorization;
             localStorage.setItem('token', token);
             localStorage.setItem('name',userData.data[1])
+            localStorage.setItem('userImage',userData.data[2])
+            localStorage.setItem('userId',userData.data[3])
             setIsLoggedIn(true)
             setName(userData.data[1])
+            setUserAccountImage(userData.data[2])
+            setUserId(userData.data[3])
           }
           else{
             return "Invalid Email or Password"
@@ -94,7 +103,7 @@ const Main = () => {
         <>
         <div style={pageStyle}>
           <MyContext.Provider value={isLoggedIn}>
-          <Header name={name} click={logoutClicked} ></Header>
+          <Header name={name} userAccountImage ={userAccountImage} click={logoutClicked} ></Header>
           </MyContext.Provider>
             
         {
@@ -103,7 +112,7 @@ const Main = () => {
             
 
             
-            <Home accountName={name}></Home>
+            <Home userAccountImage ={userAccountImage} accountName={name} userAccountId = {userId}></Home>
             </>
              : 
             <>
