@@ -17,35 +17,20 @@ const EditProfile = (props) => {
 
    
 
-    // const circleStyle = {
-    //   width: "200px",
-    //   height: "200px",
-    //   borderRadius: "50%", 
-    //   backgroundImage: `url(${image})`,
-    //   backgroundSize: "cover",
-    //   backgroundPosition: "center",
-    //   cursor:"pointer"
-    // }
+    const circleStyle = {
+      width: "200px",
+      height: "200px",
+      borderRadius: "50%", 
+      backgroundImage: `url(${image})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      cursor:"pointer"
+    }
 
     
    
 
-    // const userInfoHandler = async(id, name, image) => {
-    //   try {
-    //     const data = {
-    //       Name: name,
-    //       Image: image
-    //     }
-    //     console.log(typeof(image))
-        
-    //     // const response = await axios.put(`/api/updateUserData/${id}`, data);
-    //     // if (response){
-    //     //   console.log(response)
-    //     // }
-    //   } catch (error) {
-    //     console.error('Failed to update user data.', error);
-    //   } 
-    // }
+  
     const handleFileChange = (event) => {
       setImage(event.target.files[0]);
     };
@@ -88,23 +73,18 @@ const EditProfile = (props) => {
     return(
         <>
         <form onSubmit={handleSubmit}>
-          {/* <div className="circleContainer" style={circleStyle} >
+          <div className="circleContainer" style={circleStyle}>
          
           </div>
           <label>Name:</label><br/>
           <input type="text" id="name" value={name}  onChange={(e)=>{setName(e.target.value)}}></input>
-          <input
-          type="file"
-          id="image-upload"
-          accept="image/*"
-          onChange={handleImageUpload}
-        />
-            <button type="submit">Save</button> */}
+          
+           
             <div>
-              <input type="file" onChange={handleFileChange} />
+              <input type="file" accept="image/*" onChange={handleFileChange} />
               <button type="submit">Upload Image</button>
               
-              <img src={filePath}></img>
+             
             </div>
           
             

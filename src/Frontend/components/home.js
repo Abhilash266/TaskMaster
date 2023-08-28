@@ -225,18 +225,20 @@ const Home = (props) => {
     
 
   const handleDragEnd = (result) => {
-    if (!result.destination) return;
     const ind = result.source.index
-    if (data[ind].results.TaskState === "Pending"){
-      taskStateChanged("Completed",ind)
+    if(result.source.droppableId == result.destination.droppableId){
+      console.log("no")
+      return
     }
     else{
-      taskStateChanged("Pending",ind)
+      if (data[ind].results.TaskState === "Pending"){
+        taskStateChanged("Completed",ind)
+      }
+      else{
+        taskStateChanged("Pending",ind)
+      }
     }
-
     
-   
-  
   };
 
    
@@ -294,9 +296,10 @@ const Home = (props) => {
                   dashboardClicked &&
                   <div className="col-lg-10 col-md-10 col-sm-8">
                     
-                    <div className="coverContainer">
+                    <div className="coverContainerDashboard">
                     <DragDropContext onDragEnd={handleDragEnd}>
                       <div className="col-lg-5 col-md-4 col-sm-3">
+                        
                         <Droppable droppableId="1">
                         {(provided, snapshot) => (
                           <div ref={provided.innerRef} {...provided.droppableProps} isDraggingOver={snapshot.isDraggingOver}>
@@ -305,7 +308,7 @@ const Home = (props) => {
                                       <Draggable draggableId={`${ind}`} key={ind} index={ind}>
                                           {(provided, snapshot) => (
                                             <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} isDragging={snapshot.isDragging}>
-                                              <div className="coverStyle" id={ind} key={ind}>
+                                              <div className="coverStyle1" id={ind} key={ind}>
                                                   <div>
                                                       <Cover index={ind} title={item.results.Title} description={item.results.Description} 
                                                       priority={item.results.Priority} taskDate={item.results.TaskDate} 
@@ -326,8 +329,11 @@ const Home = (props) => {
                       </div>
 
 
-
+                      
                       <div className="col-lg-5 col-md-4 col-sm-3">
+                      
+                      <div className="completedtaskContainer">
+                      
                         <Droppable droppableId="2">
                         {(provided, snapshot) => (
                           <div ref={provided.innerRef} {...provided.droppableProps} isDraggingOver={snapshot.isDraggingOver}>
@@ -336,7 +342,7 @@ const Home = (props) => {
                                       <Draggable draggableId={`${ind}`} key={ind} index={ind}>
                                           {(provided, snapshot) => (
                                             <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} isDragging={snapshot.isDragging}>
-                                              <div className="coverStyle" id={ind} key={ind}>
+                                              <div className="coverStyle1" id={ind} key={ind}>
                                                   <div>
                                                       <Cover index={ind} title={item.results.Title} description={item.results.Description} 
                                                       priority={item.results.Priority} taskDate={item.results.TaskDate} 
@@ -354,6 +360,7 @@ const Home = (props) => {
                           </div>
                           )}
                         </Droppable>
+                        </div>
                       </div>
 
 
@@ -372,7 +379,9 @@ const Home = (props) => {
                 {
                   settingClicked &&
                   <div className="col-lg-10 col-md-10 col-sm-8">
+                    <div >
                     <EditProfile name = {props.accountName} userAccountImage = {props.userAccountImage} userAccountId = {props.userAccountId}></EditProfile>
+                    </div>
                   </div> 
                 }
                 
