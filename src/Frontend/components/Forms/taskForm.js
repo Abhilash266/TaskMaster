@@ -3,7 +3,6 @@ import "../../Styles/style.css";
 import { useFormik } from "formik";
 import { TaskFormSchema } from "../../Schemas/formSchema";
 
-import image from "../../../Backend/Images/img3.avif";
 
 
 const TaskForm = (props) => {
@@ -46,12 +45,7 @@ const TaskForm = (props) => {
         <div className="createTaskContainer">
         <div className="row">
         {type1 === "Edit" ? <h2 style={{textAlign:"center",marginBottom:"20px"}}>Edit Task</h2> : <h2 style={{textAlign:"center",marginBottom:"20px"}}>Create Task</h2>}
-            <div className="col-lg-6 col-md-6">
-                <div className="imgContainer">
-                    <img src={image}></img>
-                </div>
-            </div>
-            <div className="col-lg-3 col-md-3">
+            <div className="col-lg-12 col-md-12">
                 <form onSubmit={formik.handleSubmit}>
                     
                         <label>Title:</label><br/>
@@ -75,7 +69,7 @@ const TaskForm = (props) => {
                         {formik.errors.Priority && formik.touched.Priority && <p className="error">{formik.errors.Priority}</p>}
                         <br/>
                         <label>Date:</label><br/>
-                        <input type="date" id="TaskDate" value={formik.values.TaskDate} min = {today} onChange={formik.handleChange}
+                        <input type="date" id="TaskDate" value={formik.values.TaskDate}  onChange={formik.handleChange}
                         onBlur={formik.handleBlur}  className={formik.errors.TaskDate && formik.touched.TaskDate? "input-error" : ""}/>
                         {formik.errors.TaskDate && formik.touched.TaskDate && <p className="error">{formik.errors.TaskDate}</p>}
                         <br/>

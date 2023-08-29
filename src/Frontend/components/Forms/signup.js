@@ -3,16 +3,33 @@ import "../../Styles/style.css"
 import { useFormik } from "formik";
 import { SignupSchema } from "../../Schemas/formSchema";
 import userAccountImage from "../../../Backend/Images/img5.avif"
-    
+import { useState } from "react";
+import { css } from '@emotion/react';
+import { BeatLoader } from 'react-spinners';
 
 const Signup = (props) => {
     
-    
+    const [isLoading, setIsLoading] = useState(false)
     const onSubmit = async(values, actions) => {
-        values.Image = {userAccountImage}
+        setIsLoading(true)
+        try{
+            values.Image = {userAccountImage}
         await props.getInfo(values,"Signup")
+        }
+        catch(err){
+            console.log(err)
+        }
+        finally{
+            setIsLoading(false)
+        }
+        
         
     };
+    const override = css`
+    display: block;
+    margin: 0 auto;
+  `;
+
     const formik = useFormik({
         initialValues:{
             Name:"",

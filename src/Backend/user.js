@@ -58,15 +58,13 @@ const checkLogin = async(email,password) => {
     
   }
 
-  const updateUserData = async(userId, name, image) => {
+  const updateUserData = async(userId, image) => {
     try{
-      console.log(userId, name, image)
       const db = client.db(dbName);
       const collection = db.collection('UserData');
       const filter = { _id: new ObjectId(userId) };
       const update = {
         $set:  {
-          Name: name,
           Image: { userAccountImage: image }
         }
         
@@ -78,9 +76,21 @@ const checkLogin = async(email,password) => {
     }
   }
 
+  const getUserData = async(userId) => {
+    try{
+      const db = client.db(dbName);
+      const collection = db.collection('UserData');
+      const user = await collection.findOne({ _id: new ObjectId(userId) });
+      return user.Image.userAccountImage
+    }
+    catch(err){
+      console.log(err)
+    }
+  }
 
   module.exports = {
     checkLogin,
     signUpHandler,
-    updateUserData
+    updateUserData,
+    getUserData
   };

@@ -94,7 +94,11 @@ const Main = () => {
       setIsLoggedIn(false)
       localStorage.removeItem('token');
       localStorage.removeItem('name');
+      localStorage.removeItem('userId');
+      localStorage.removeItem('userImage');
       setName("")
+      setUserId("")
+      setUserAccountImage("")
     }
 
   

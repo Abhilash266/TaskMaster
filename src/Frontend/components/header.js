@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import MyContext from "../createContext";
 import "../Styles/style.css"
 import { useContext } from "react";
@@ -18,45 +18,25 @@ const Header = (props) => {
         backgroundImage: `url(${image})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
-        cursor:"pointer"
+        float:"left",
+        
       }
     
   
     return(
-        <>
-        <div className="container-fluid" id="header">
-            
+        <div className="container-fluid" id="header"> 
             <header className="headerStyle">
-
-            <div className="row">
-                <div className="col-lg-6">
                     { props.name ? 
-                    <div className="row">
-                        <div className="col-lg-1">
-                            <div className="circleContainer" style={circleStyle} >
-
-                            </div>
-                            
-                        </div>
-                        <div className="col-lg-5">
-                            <h3>Welcome {props.name}</h3>
-                        </div>
-                    </div>
-                    
-                    : <h3>My Website</h3> }
+                        <div>
+                            <div className="circleContainer" style={circleStyle}></div>
+                            <h3 style={{float:"left", margin: "5px 0 0 15px"}}>Welcome {props.name}</h3>
+                        </div> : <h3>My Website</h3> }
+                
+                <div>
+                    { value && <h3 onClick={props.click} style={{float:"right"}}>Logout</h3>}
                 </div>
-                <div className="col-lg-6" id="logout">
-                    { value && <h3 onClick={props.click}>Logout</h3>}
-                </div>
-            </div>
-        
             </header>
-
-            </div>
-        
-        
-        </>
-
+        </div>
     )
 }
 

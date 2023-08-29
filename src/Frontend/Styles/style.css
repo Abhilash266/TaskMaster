@@ -18,7 +18,7 @@ body{
 
 .headerStyle{
     color: #fff;
-    padding: 10px;
+    margin-top: 10px;
 }
 #logout{
     text-align:end
@@ -32,38 +32,7 @@ body{
     display: inline-block;
   }
   
-  .dropdown-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-  }
   
-  .dropdown-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: white;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .dropdown-menu li {
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
-    cursor: pointer;
-  }
-  
-  .dropdown-menu li:last-child {
-    border-bottom: none;
-  }
-  
-  .dropdown-menu li:hover {
-    background-color: #f0f0f0;
-  }
   
 
 .circularContainer{
@@ -205,9 +174,7 @@ input.input-error, select.input-error, textarea.input-error{
     height: 100%;
   }
 
-#mainBar{
-    transition: width 0.4s ease-in-out; 
-}
+
 .button6active{
     margin-top: auto !important;
 }
@@ -227,16 +194,52 @@ input.input-error, select.input-error, textarea.input-error{
 
 
 
-.col-lg-1#mainBar, .col-lg-2#mainBar, .col-lg-10#mainBar, .col-lg-11#mainBar{
-    padding-top: 10px;
+#mainBar{
+    margin-top: 10px;
+    transition: width 0.4s ease-in-out; 
 }
-#taskFormContainer.col-lg-10 {
-    padding-top: 10px;
+
+#taskFormContainer{
+    margin-top: 10px;
+    transition: width 0.4s ease-in-out; 
+}
+#dashboardContainer{
+    transition: width 0.4s ease-in-out; 
+}
+#settingsContainer{
+    margin-top: 10px;
+    transition: width 0.4s ease-in-out; 
 }
 .createTaskContainer{
     padding: 10px;
 }
-
+.settingsContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid white;
+    border-radius: 10px;
+    height: 100%;
+    padding: 10px;
+}
+#imageUploadContainer:hover .overlay{
+    opacity: 1;
+}
+.overlay {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay color */
+    opacity: 0;
+    transition: opacity 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    color: #fff;
+    text-align: center;
+  }
 
 
 .icon{
@@ -266,3 +269,20 @@ input#Title, textarea#Description, select#Priority, input#TaskDate{
 .completedtaskContainer{
     min-height:50%
 }
+
+.pendingTasksContainer{
+    margin-top: 10px;
+    border: 2px solid white;
+    padding: 20px;
+    border-radius: 10px;
+}
+.completedTasksContainer{
+    margin-top: 10px;
+    border: 2px solid white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+
+
+

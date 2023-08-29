@@ -1,25 +1,31 @@
 import React from "react";
 import axios from 'axios';
-import { useState } from "react";
+import { useState, useRef } from "react";
+import "../../Styles/style.css";
+import { css } from '@emotion/react';
+import { BeatLoader } from 'react-spinners';
 
 
 
 const EditProfile = (props) => {
   const userAccountImage = props.userAccountImage
   
-
+  
    
   const [image, setImage] = useState(userAccountImage);
-  const [filePath, setFilePath] = useState(userAccountImage);
-  const [name, setName] = useState(props.name)
+  const [isUploaded, setIsUploaded] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const userAccountId = props.userAccountId
     
-
+  const getNewImage = async() => {
+        const newImage = await axios.get(`/api/getUserData/${userAccountId}`)
+        setImage(newImage)
+  }
    
 
     const circleStyle = {
-      width: "200px",
-      height: "200px",
+      width: "500px",
+      height: "500px",
       borderRadius: "50%", 
       backgroundImage: `url(${image})`,
       backgroundSize: "cover",
@@ -30,61 +36,88 @@ const EditProfile = (props) => {
     
    
 
-  
-    const handleFileChange = (event) => {
-      setImage(event.target.files[0]);
+    const handleUpload = async (event) => {
+      setIsUploaded(true)
+      const file = event.target.files[0];
+      if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setImage(e.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
     };
-    const handleUpload = async () => {
-      const formData = new FormData();
-      formData.append('image', image);
-  
-      try {
-        const response = await axios.post('/upload', formData);
-  
-        if (response.status === 200) {
-            const imagePath = response.data.imagePath
-            const newImagePath = imagePath.replace(/\\/g, "/");
-            setFilePath(newImagePath)
-        } else {
-          console.log("Failed")
-        }
-      } catch (error) {
-        console.log(error)
+
+    const saveUpload = async(data) => {
+      try{
+        console.log(data)
+          const res = await axios.put(`/api/updateUserData/${userAccountId}`,data)
+          console.log(res)
       }
-    };
-    
+      catch(err){
+          console.log(err)
+      }
+    }
     const handleSubmit = async(event) => {
-        event.preventDefault();
-        console.log(image)
-        await handleUpload()
+        event.preventDefault()
+        setIsLoading(true)
+        const data = {
+          Image: image
+        }
+        try{
+          await saveUpload(data)
+          await getNewImage
+          localStorage.setItem("userImage",JSON.stringify(image))
+        }
+        catch(err){
+          console.log(err)
+        }
+        finally{
+          setIsUploaded(false)
+          await setTimeout(() => {
+            window.location.reload();
+            setIsLoading(false)
+          }, 2000);
+          
+        }
+  
         
     }
 
-    
+    const override = css`
+  display: block;
+  margin: 0 auto;
+`;
  
-   
-    
+  
+    const imageInputRef = useRef(null);
+    const openImageUploader = () => {
+      imageInputRef.current.click();
+    };
 
 
-
-    
+  
 
 
     return(
         <>
         <form onSubmit={handleSubmit}>
-          <div className="circleContainer" style={circleStyle}>
-         
+        <h2 style={{textAlign:"center"}}>Change Profile Image</h2>
+          <div className="circleContainer" style={circleStyle} onClick={openImageUploader} id="imageUploadContainer">
+            <div className="overlay">
+              <h2>UPLOAD IMAGE</h2>
+              
+            </div>
+              <input  type="file" accept="image/*" ref={imageInputRef} style={{display:"none",cursor:"pointer",zIndex:"999"}} onChange={handleUpload} />
           </div>
-          <label>Name:</label><br/>
-          <input type="text" id="name" value={name}  onChange={(e)=>{setName(e.target.value)}}></input>
+         
           
            
-            <div>
-              <input type="file" accept="image/*" onChange={handleFileChange} />
-              <button type="submit">Upload Image</button>
-              
-             
+            <div style={{textAlign:"center"}}>
+              {
+                isUploaded && <button id="primaryButton" type="submit">Save</button>
+              }
+              {isLoading && <BeatLoader css={override} />}
             </div>
           
             

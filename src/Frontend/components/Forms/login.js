@@ -1,15 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../../Styles/style.css"
 import { useFormik } from "formik";
 import { LoginSchema } from "../../Schemas/formSchema";
+import { css } from '@emotion/react';
+import { BeatLoader } from 'react-spinners';
+import { useState } from "react";
 
 
 const LoginForm = (props) => {
+    const [isLoading, setIsLoading] = useState(false)
 
     const onSubmit = async(values,actions) => {  
-        await props.getInfo(values,"Login")
+        setIsLoading(true)
+        try{
+            await props.getInfo(values,"Login")
         actions.resetForm()
+        }
+        catch(err){
+            console.log(err)
+        }
+        finally{
+            setIsLoading(false)
+        }
+        
     };
+    const override = css`
+  display: block;
+  margin: 0 auto;
+`;
     const formik = useFormik({
         initialValues:{
             Email:"",
@@ -38,6 +56,7 @@ const LoginForm = (props) => {
             
             
             <button className="primaryButton" type="submit">Login</button>
+            {isLoading && <BeatLoader css={override} />}
             
         </form>
         </div>

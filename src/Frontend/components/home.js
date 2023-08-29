@@ -241,6 +241,16 @@ const Home = (props) => {
     
   };
 
+  const checkDataLength = (data) => {
+    var len = 0
+    for(let i = 0; i < data.length; i++){
+      if(data[i].results.AccountName == accountName){
+          len += 1
+      }
+    }
+    return len
+  }
+
    
     return (
         
@@ -254,10 +264,11 @@ const Home = (props) => {
               
                 {
                     taskListClicked &&
-                    <div className={`${toggleBar ? 'col-lg-11 col-md-11 col-sm-9' : 'col-lg-10 col-md-10 col-sm-8'}`} id="mainBar">
+                    <div className={`${toggleBar ? 'col-lg-11 col-md-11 col-sm-11' : 'col-lg-10 col-md-10 col-sm-10'}`} id="mainBar">
                       <div className="coverContainer">
+                      {checkDataLength(data) == 0 && <h3>Create your first task</h3>}
                     {data.map((item, ind) => (
-                        item.results.AccountName === accountName ?
+                        item.results.AccountName === accountName &&
                         <div className="coverStyle" id={ind} key={ind}>
                             <div>
                                 <Cover index={ind} title={item.results.Title} description={item.results.Description} 
@@ -265,8 +276,9 @@ const Home = (props) => {
                                 taskState = {item.results.TaskState} taskStateChanged = {taskStateChanged}
                                 editHandler={editHandler} deleteHandler={deleteHandler}></Cover>
                             </div>
-                        </div>:""
+                        </div>
                     ))}
+                    
                         <div className="coverStyle" id="newCover" onClick={createButtonHandler}>+</div>
                       </div>
                 </div> 
@@ -274,7 +286,7 @@ const Home = (props) => {
                 
                 {
                     createTaskClicked &&
-                    <div className="col-lg-10 col-md-10 col-sm-8" id="taskFormContainer">
+                    <div className={`${toggleBar ? 'col-lg-11 col-md-11 col-sm-11' : 'col-lg-10 col-md-10 col-sm-10'}`} id="taskFormContainer">
                       <div className="taskFormContainer">
                         <TaskForm accountName={accountName} getInfo = {getInfo} cancelButton = {cancelButtonHandler} type="Submit"></TaskForm>
                       </div>
@@ -283,7 +295,7 @@ const Home = (props) => {
                 
                 {
                   editTaskClicked &&
-                  <div className="col-lg-10 col-md-10 col-sm-8" id="taskFormContainer">
+                  <div className={`${toggleBar ? 'col-lg-11 col-md-11 col-sm-11' : 'col-lg-10 col-md-10 col-sm-10'}`} id="taskFormContainer">
                     <div className="taskFormContainer" >
                       <TaskForm accountName={accountName} getInfo = {getInfo} cancelButton = {cancelButtonHandler} title = {title} description = {description} priority = {priority} taskDate = {taskDate} type="Edit"></TaskForm>
                     </div>
@@ -294,17 +306,19 @@ const Home = (props) => {
                 
                 {
                   dashboardClicked &&
-                  <div className="col-lg-10 col-md-10 col-sm-8">
+                  <div className={`${toggleBar ? 'col-lg-11 col-md-11 col-sm-11' : 'col-lg-10 col-md-10 col-sm-10'}`} id="dashboardContainer">
+                    <div className="row">
                     
-                    <div className="coverContainerDashboard">
+                    
                     <DragDropContext onDragEnd={handleDragEnd}>
-                      <div className="col-lg-5 col-md-4 col-sm-3">
-                        
+                      <div className={`${toggleBar ? 'col-lg-6 col-md-6 col-sm-3' : 'col-lg-6 col-md-6 col-sm-3'}`}>
+                        <div className="pendingTasksContainer">
+                        <h3 style={{textAlign:"center"}}>Pending Tasks</h3>
                         <Droppable droppableId="1">
                         {(provided, snapshot) => (
                           <div ref={provided.innerRef} {...provided.droppableProps} isDraggingOver={snapshot.isDraggingOver}>
                                     {data.map((item, ind) => (
-                                      item.results.TaskState === "Pending" &&
+                                      item.results.TaskState === "Pending" && item.results.AccountName === accountName &&
                                       <Draggable draggableId={`${ind}`} key={ind} index={ind}>
                                           {(provided, snapshot) => (
                                             <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} isDragging={snapshot.isDragging}>
@@ -326,19 +340,21 @@ const Home = (props) => {
                           </div>
                           )}
                         </Droppable>
+                        </div>
                       </div>
 
 
                       
-                      <div className="col-lg-5 col-md-4 col-sm-3">
+                      <div className={`${toggleBar ? 'col-lg-6 col-md-6 col-sm-3' : 'col-lg-6 col-md-6 col-sm-3'}`}>
+                      {checkDataLength(data) == 0 && <h3>No Tasks Created</h3>}
                       
-                      <div className="completedtaskContainer">
-                      
+                      <div className="completedTasksContainer">
+                      <h3 style={{textAlign:"center"}}>Completed Tasks</h3>
                         <Droppable droppableId="2">
                         {(provided, snapshot) => (
                           <div ref={provided.innerRef} {...provided.droppableProps} isDraggingOver={snapshot.isDraggingOver}>
                                     {data.map((item, ind) => (
-                                      item.results.TaskState === "Completed" &&
+                                      item.results.TaskState === "Completed" && item.results.AccountName === accountName &&
                                       <Draggable draggableId={`${ind}`} key={ind} index={ind}>
                                           {(provided, snapshot) => (
                                             <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} isDragging={snapshot.isDragging}>
@@ -369,17 +385,17 @@ const Home = (props) => {
 
 
                       </DragDropContext>
-                   
+                   </div>
                       
-                    </div>
+                    
                       
                   </div>
                 }
 
                 {
                   settingClicked &&
-                  <div className="col-lg-10 col-md-10 col-sm-8">
-                    <div >
+                  <div className={`${toggleBar ? 'col-lg-11 col-md-11 col-sm-11' : 'col-lg-10 col-md-10 col-sm-10'}`} id="settingsContainer">
+                    <div className="settingsContainer">
                     <EditProfile name = {props.accountName} userAccountImage = {props.userAccountImage} userAccountId = {props.userAccountId}></EditProfile>
                     </div>
                   </div> 
