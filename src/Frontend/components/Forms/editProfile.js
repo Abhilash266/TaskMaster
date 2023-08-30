@@ -30,7 +30,8 @@ const EditProfile = (props) => {
       backgroundImage: `url(${image})`,
       backgroundSize: "cover",
       backgroundPosition: "center",
-      cursor:"pointer"
+      cursor:"pointer",
+      border: "2px solid #333"
     }
 
     

@@ -30,10 +30,10 @@ const Header = (props) => {
                         <div>
                             <div className="circleContainer" style={circleStyle}></div>
                             <h3 style={{float:"left", margin: "5px 0 0 15px"}}>Welcome {props.name}</h3>
-                        </div> : <h3>My Website</h3> }
+                        </div> : <h3>Task Master</h3> }
                 
                 <div>
-                    { value && <h3 onClick={props.click} style={{float:"right"}}>Logout</h3>}
+                    { value && <h3 onClick={props.click} style={{float:"right", cursor:"pointer"}}>Logout</h3>}
                 </div>
             </header>
         </div>

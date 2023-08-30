@@ -22,8 +22,7 @@ const Home = (props) => {
     const [dashboardClicked, setDashboardClicked] = useState(false)
     const [settingClicked, setSettingClicked] = useState(false)
 
-    const [currentTasks, setCurrentTasks] = useState()
-    const [completedtasks, setCompletedTasks] = useState()
+    const [themeToggle, setThemeToggle] = useState(false)
     
 
     const accountName = props.accountName
@@ -241,7 +240,18 @@ const Home = (props) => {
     
   };
 
-  const checkDataLength = (data) => {
+  const toggleHandler = () => {
+    setThemeToggle(!themeToggle)
+    if(themeToggle){
+      document.body.style.backgroundColor = "#6D9AC4";
+    }
+    else{
+      document.body.style.backgroundColor = "#fff";
+    }
+    
+  }
+
+  const checkDataLength = () => {
     var len = 0
     for(let i = 0; i < data.length; i++){
       if(data[i].results.AccountName == accountName){
@@ -259,35 +269,42 @@ const Home = (props) => {
             
                 <div className={`${toggleBar ? 'col-lg-1 col-md-1 col-sm-3' : 'col-lg-2 col-md-2 col-sm-4'}`} id="mainBar">
                     <Sidebar createButton = {createButtonHandler} taskButton = {taskListHandler} settingButton = {settingHandler} 
-                    dashboardButton = {dashboardHandler} handleToggleBar = {handleToggleBar} ></Sidebar>
+                    dashboardButton = {dashboardHandler} toggleHandler = {toggleHandler} themeToggle = {themeToggle} 
+                    handleToggleBar = {handleToggleBar} click={props.click} checkLength = {checkDataLength} ></Sidebar>
                 </div>
               
                 {
                     taskListClicked &&
+                    
                     <div className={`${toggleBar ? 'col-lg-11 col-md-11 col-sm-11' : 'col-lg-10 col-md-10 col-sm-10'}`} id="mainBar">
-                      <div className="coverContainer">
-                      {checkDataLength(data) == 0 && <h3>Create your first task</h3>}
-                    {data.map((item, ind) => (
+                      <div className={`${themeToggle ? 'coverContainerLight' : 'coverContainer'}`}>
+                      {checkDataLength() == 0 ? <h3 style={{marginTop:"10px"}}>Create your first task</h3> :
+                    data.map((item, ind) => (
                         item.results.AccountName === accountName &&
-                        <div className="coverStyle" id={ind} key={ind}>
+                        <div className={`${themeToggle ? 'coverStyleLight' : 'coverStyle'}`} id={ind} key={ind}>
                             <div>
                                 <Cover index={ind} title={item.results.Title} description={item.results.Description} 
                                 priority={item.results.Priority} taskDate={item.results.TaskDate} 
                                 taskState = {item.results.TaskState} taskStateChanged = {taskStateChanged}
-                                editHandler={editHandler} deleteHandler={deleteHandler}></Cover>
+                                editHandler={editHandler} deleteHandler={deleteHandler} themeToggle = {themeToggle}></Cover>
                             </div>
                         </div>
-                    ))}
-                    
-                        <div className="coverStyle" id="newCover" onClick={createButtonHandler}>+</div>
+                    ))
+                      }
+                      {
+                        checkDataLength() != 0 && <div className={`${themeToggle ? 'coverStyleLight' : 'coverStyle'}`} id={`${themeToggle ? 'newCoverLight' : 'newCover'}`} onClick={createButtonHandler}>
+                          <h3>Create New Task</h3>
+                          </div>
+                      }
+                        
                       </div>
-                </div> 
+                </div>
                 }
                 
                 {
                     createTaskClicked &&
                     <div className={`${toggleBar ? 'col-lg-11 col-md-11 col-sm-11' : 'col-lg-10 col-md-10 col-sm-10'}`} id="taskFormContainer">
-                      <div className="taskFormContainer">
+                      <div className={`${themeToggle ? 'taskFormContainerLight' : 'taskFormContainer'}`}>
                         <TaskForm accountName={accountName} getInfo = {getInfo} cancelButton = {cancelButtonHandler} type="Submit"></TaskForm>
                       </div>
                     </div> 
@@ -296,7 +313,7 @@ const Home = (props) => {
                 {
                   editTaskClicked &&
                   <div className={`${toggleBar ? 'col-lg-11 col-md-11 col-sm-11' : 'col-lg-10 col-md-10 col-sm-10'}`} id="taskFormContainer">
-                    <div className="taskFormContainer" >
+                    <div className={`${themeToggle ? 'taskFormContainerLight' : 'taskFormContainer'}`} >
                       <TaskForm accountName={accountName} getInfo = {getInfo} cancelButton = {cancelButtonHandler} title = {title} description = {description} priority = {priority} taskDate = {taskDate} type="Edit"></TaskForm>
                     </div>
                   </div> 
@@ -309,10 +326,10 @@ const Home = (props) => {
                   <div className={`${toggleBar ? 'col-lg-11 col-md-11 col-sm-11' : 'col-lg-10 col-md-10 col-sm-10'}`} id="dashboardContainer">
                     <div className="row">
                     
-                    
+                    {checkDataLength() == 0 ? <h3 style={{marginTop:"10px"}}>You are yet to create a task</h3> :
                     <DragDropContext onDragEnd={handleDragEnd}>
                       <div className={`${toggleBar ? 'col-lg-6 col-md-6 col-sm-3' : 'col-lg-6 col-md-6 col-sm-3'}`}>
-                        <div className="pendingTasksContainer">
+                        <div className={`${themeToggle ? 'pendingTasksContainerLight' : 'pendingTasksContainer'}`}>
                         <h3 style={{textAlign:"center"}}>Pending Tasks</h3>
                         <Droppable droppableId="1">
                         {(provided, snapshot) => (
@@ -322,9 +339,9 @@ const Home = (props) => {
                                       <Draggable draggableId={`${ind}`} key={ind} index={ind}>
                                           {(provided, snapshot) => (
                                             <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} isDragging={snapshot.isDragging}>
-                                              <div className="coverStyle1" id={ind} key={ind}>
+                                              <div className={`${themeToggle ? 'coverStyle1Light' : 'coverStyle1'}`} id={ind} key={ind}>
                                                   <div>
-                                                      <Cover index={ind} title={item.results.Title} description={item.results.Description} 
+                                                      <Cover index={ind} themeToggle = {themeToggle} title={item.results.Title} description={item.results.Description} 
                                                       priority={item.results.Priority} taskDate={item.results.TaskDate} 
                                                       taskState = {item.results.TaskState} taskStateChanged = {taskStateChanged}
                                                       editHandler={editHandler} deleteHandler={deleteHandler}></Cover>
@@ -346,9 +363,9 @@ const Home = (props) => {
 
                       
                       <div className={`${toggleBar ? 'col-lg-6 col-md-6 col-sm-3' : 'col-lg-6 col-md-6 col-sm-3'}`}>
-                      {checkDataLength(data) == 0 && <h3>No Tasks Created</h3>}
                       
-                      <div className="completedTasksContainer">
+                      
+                      <div className={`${themeToggle ? 'completedTasksContainerLight' : 'completedTasksContainer'}`}>
                       <h3 style={{textAlign:"center"}}>Completed Tasks</h3>
                         <Droppable droppableId="2">
                         {(provided, snapshot) => (
@@ -358,12 +375,12 @@ const Home = (props) => {
                                       <Draggable draggableId={`${ind}`} key={ind} index={ind}>
                                           {(provided, snapshot) => (
                                             <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} isDragging={snapshot.isDragging}>
-                                              <div className="coverStyle1" id={ind} key={ind}>
+                                              <div className={`${themeToggle ? 'coverStyle1Light' : 'coverStyle1'}`} id={ind} key={ind}>
                                                   <div>
                                                       <Cover index={ind} title={item.results.Title} description={item.results.Description} 
                                                       priority={item.results.Priority} taskDate={item.results.TaskDate} 
                                                       taskState = {item.results.TaskState} taskStateChanged = {taskStateChanged}
-                                                      editHandler={editHandler} deleteHandler={deleteHandler}></Cover>
+                                                      editHandler={editHandler} deleteHandler={deleteHandler} themeToggle = {themeToggle}></Cover>
                                                   </div>
                                               </div>
                                               
@@ -384,7 +401,7 @@ const Home = (props) => {
 
 
 
-                      </DragDropContext>
+                      </DragDropContext>}
                    </div>
                       
                     
@@ -395,7 +412,7 @@ const Home = (props) => {
                 {
                   settingClicked &&
                   <div className={`${toggleBar ? 'col-lg-11 col-md-11 col-sm-11' : 'col-lg-10 col-md-10 col-sm-10'}`} id="settingsContainer">
-                    <div className="settingsContainer">
+                    <div className={`${themeToggle ? 'settingsContainerLight' : 'settingsContainer'}`}>
                     <EditProfile name = {props.accountName} userAccountImage = {props.userAccountImage} userAccountId = {props.userAccountId}></EditProfile>
                     </div>
                   </div> 

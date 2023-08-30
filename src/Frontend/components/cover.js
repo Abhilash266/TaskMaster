@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../Styles/style.css";
 
 
 const Cover = (props) => {
@@ -9,7 +10,7 @@ const Cover = (props) => {
     const date = day[2]
     const month = day[1]
     const year = day[0]
-    
+    const themeToggle = props.themeToggle
     const monthText = {
         "01":"Jan", "02":"Feb", "03":"Mar", "04":"Apr", "05":"May",
         "06":"Jun", "07":"July", "08":"Aug", "09":"Sept", "10":"Oct",
@@ -95,7 +96,7 @@ const Cover = (props) => {
                 
                 
                 <div className="col-lg-9">
-                <div style={{borderLeft:"2px solid white", paddingLeft:"10px"}}>
+                <div className={`${themeToggle ? 'coverInfoLight' : 'coverInfo'}`}>
                     <h5>{props.title}</h5>
                     <h6>{props.description}</h6>
                 

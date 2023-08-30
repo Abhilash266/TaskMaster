@@ -99,6 +99,7 @@ const Main = () => {
       setName("")
       setUserId("")
       setUserAccountImage("")
+      document.body.style.backgroundColor = "#6D9AC4";
     }
 
   
@@ -115,8 +116,9 @@ const Main = () => {
             <>
             
 
-            
-            <Home userAccountImage ={userAccountImage} accountName={name} userAccountId = {userId}></Home>
+    
+            <Home userAccountImage ={userAccountImage} accountName={name} userAccountId = {userId} click={logoutClicked}></Home>
+           
             </>
              : 
             <>

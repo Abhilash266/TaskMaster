@@ -60,7 +60,7 @@ const Signup = (props) => {
             {formik.errors.Password && formik.touched.Password && <p className="error">{formik.errors.Password}</p>}
             <br />
             <button className="primaryButton" type="submit">Sign Up</button>
-            
+            {isLoading && <BeatLoader css={override} />}
         </form>
         </div>
     )

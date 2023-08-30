@@ -2,6 +2,9 @@ body{
     margin: 0; 
     padding: 0; 
     background-color: #6D9AC4;
+    height: 100dvh;
+    /* background-color: #fff; */
+    
 
     
 }
@@ -50,9 +53,8 @@ body{
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    border: 2px solid white;
+    border: 2px solid #fff;
     border-radius: 10px;
-    height: 100%;
     padding: 10px;
 }
 .coverContainerDashboard{
@@ -64,12 +66,15 @@ body{
     margin-top: 10px;
     border: 2px solid white;
     border-radius: 10px;
-    height: 100%;
 
 }
 #newCover{
-    background-color: #7a7a7a;
-    font-size: 70px;
+    background-color: #949494;
+    text-align: center;
+    cursor: pointer;
+}
+#newCoverLight{
+    background-color: #ffffff;
     text-align: center;
     cursor: pointer;
 }
@@ -80,8 +85,10 @@ body{
     border: 2px solid #fff;
     border-radius: 10px;
     padding:10px;
+    min-height: 200px;
     margin-bottom:10px
 }
+
 .coverStyle1{
     background:#333;
     color:white;
@@ -90,6 +97,7 @@ body{
     padding:10px;
     margin-bottom:10px
 }
+
 /* End Cover Style */
 
 
@@ -153,8 +161,7 @@ input.input-error, select.input-error, textarea.input-error{
 .sideBarContainer{
     display: flex;
     flex-direction: column;
-    background-color: aliceblue;
-    height: 100%;
+    min-height: 100dvh;
     position: relative;
     left: 0; 
     transition: width 0.4s ease-in-out; 
@@ -167,11 +174,18 @@ input.input-error, select.input-error, textarea.input-error{
     border:2px solid white !important;
     
   }
-.sideBarContainer.active {
+.sideBarContainerActive {
     width: 100%;
     transition: width 0.4s ease-in-out; 
     border-radius: 10px;
-    height: 100%;
+    min-height: 100dvh;
+
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    left: 0; 
+    border: 2px solid #fff;
+    background-color: #333;
   }
 
 
@@ -211,15 +225,16 @@ input.input-error, select.input-error, textarea.input-error{
     transition: width 0.4s ease-in-out; 
 }
 .createTaskContainer{
-    padding: 10px;
+    padding: 20px;
+    border-radius: 10px;
 }
 .settingsContainer{
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 2px solid white;
+    border: 2px solid #fff;
     border-radius: 10px;
-    height: 100%;
+    min-height: 100dvh;
     padding: 10px;
 }
 #imageUploadContainer:hover .overlay{
@@ -265,24 +280,155 @@ input#Title, textarea#Description, select#Priority, input#TaskDate{
 /* End Task Bar style */
 
 
-
-.completedtaskContainer{
-    min-height:50%
+.iconToggle{
+    font-size: 50px;
+    transition: 0.7s;
 }
+.button7{
+    background: none !important;
+    border: none !important;
+    width: fit-content;
+    width: -moz-fit-content;
+}
+
+
+
 
 .pendingTasksContainer{
     margin-top: 10px;
-    border: 2px solid white;
+    border: 2px solid #fff;
     padding: 20px;
     border-radius: 10px;
+    min-height: 100dvh;
 }
 .completedTasksContainer{
     margin-top: 10px;
-    border: 2px solid white;
+    border: 2px solid #fff;
     padding: 20px;
     border-radius: 10px;
+    min-height: 100dvh;
+}
+
+[data-rbd-droppable-id="2"]{
+    min-height: 100dvh;
+}
+[data-rbd-droppable-id="1"]{
+    min-height: 100dvh;
 }
 
 
 
+/* LIGHT THEME */
+.pendingTasksContainerLight{
+    margin-top: 10px;
+    border: 2px solid #333;
+    padding: 20px;
+    border-radius: 10px;
+    min-height: 100dvh;
+}
+.completedTasksContainerLight{
+    margin-top: 10px;
+    border: 2px solid #333;
+    padding: 20px;
+    border-radius: 10px;
+    min-height: 100dvh;
+}
+.coverInfo{
+    border-left:2px solid #fff;
+    padding-left:10px
+}
+.coverStyle1Light{
+    background:#fff;
+    color:#333;
+    border: 2px solid #333;
+    border-radius: 10px;
+    padding:10px;
+    margin-bottom:10px;
+}
+.coverStyleLight{
+    background:#fff;
+    color:#333;
+    width:25vw;
+    border: 2px solid #333;
+    border-radius: 10px;
+    padding:10px;
+    margin-bottom:10px;
+    min-height: 200px;
+}
+.coverContainerLight{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    border: 2px solid #333;
+    border-radius: 10px;
+    padding: 10px;
+}
+.createTaskContainerLight{
+    padding: 20px;
+    border: 2px solid #333;
+    border-radius: 10px;
+}
+.settingsContainerLight{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid #333;
+    border-radius: 10px;
+    min-height: 100dvh;
+    padding: 10px;
+}
 
+.taskFormContainerLight{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid #333;
+    border-radius: 10px;
+    min-height: 100dvh;
+    padding: 10px;
+}
+
+
+#primaryButtonLight{
+    background-color: #fff;
+    color: #EE5684;
+    border: 2px solid #333;
+    border-radius: 10px;
+    padding:10px;
+    margin: 10px;
+    
+}
+
+.sideBarContainerLight{
+    display: flex;
+    flex-direction: column;
+    background-color: aliceblue;
+    min-height: 100dvh;
+    position: relative;
+    left: 0; 
+    transition: width 0.4s ease-in-out; 
+    width: 100%;
+    border: 2px solid #333;
+    background-color: #fff;
+    border-radius: 10px;
+}
+.sideBarContainerActiveLight {
+    width: 100%;
+    transition: width 0.4s ease-in-out; 
+    border-radius: 10px;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    left: 0; 
+    border: 2px solid #333;
+    background-color: #fff;
+  }
+
+.selectedButtonLight {
+    border:2px solid #EE5684 !important;
+  }
+.coverInfoLight{
+    border-left:2px solid #333;
+    padding-left:10px
+}

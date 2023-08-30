@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import "../Styles/style.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faArrowRight, faPencilAlt, faTasks, faHome, faCog, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faArrowRight, faPencilAlt, faTasks, faHome, faCog, faSignOutAlt, faToggleOn, faToggleOff } from '@fortawesome/free-solid-svg-icons';
+
+
 
 
 
@@ -12,7 +14,8 @@ const Sidebar = (props) => {
 
     const [isActive, setIsActive] = useState(false)
     const [selectedButton, setSelectedButton] = useState("button3");
-
+    const themeToggle = props.themeToggle
+    
     const toggleSidebar = () => {
         setIsActive(!isActive);
         props.handleToggleBar()
@@ -39,28 +42,44 @@ const Sidebar = (props) => {
         props.settingButton()
         handleButtonClick("button5")
     }
+    const toggleHandler = () => {
+        props.toggleHandler()
+    }
+
+    const signOutHandler = () => {
+        props.click()
+    }
     
     return(
-        <div className={`sideBarContainer ${isActive ? 'active' : ''}`}>
-            <button className="button1" id="primaryButton" 
+        <div className={`${isActive ? `${themeToggle ? 'sideBarContainerActiveLight' : 'sideBarContainerActive'}` : `${themeToggle ? 'sideBarContainerLight' : 'sideBarContainer'}`}`}>
+            <button className="button1" id={`${themeToggle ? 'primaryButtonLight' : 'primaryButton'}`} 
             onClick={toggleSidebar}>
             {isActive ? <FontAwesomeIcon className="icon" icon={faArrowRight} /> : <FontAwesomeIcon className="icon" icon={faArrowLeft} />}
             </button>
-            <button className={selectedButton == "button2" ? "selectedButton" : "button2"} id="primaryButton" onClick={createButtonHandler}>
+            <button className={selectedButton == "button2" ? `${themeToggle ? 'selectedButtonLight' : 'selectedButton'}` : "button2"} id={`${themeToggle ? 'primaryButtonLight' : 'primaryButton'}`} onClick={createButtonHandler}>
                 {isActive ? <FontAwesomeIcon className="icon" icon={faPencilAlt} /> : "Create Task"}
             </button>
-            <button className={selectedButton == "button3" ? "selectedButton" : "button3"} id="primaryButton" onClick={taskListHandler}>
+            
+            <button className={selectedButton == "button3" ? `${themeToggle ? 'selectedButtonLight' : 'selectedButton'}` : "button3"} id={`${themeToggle ? 'primaryButtonLight' : 'primaryButton'}`} onClick={taskListHandler}>
                 {isActive ? <FontAwesomeIcon className="icon" icon={faTasks} /> : "Task List"}
             </button>
-            <button className={selectedButton == "button4" ? "selectedButton" : "button4"} id="primaryButton" onClick={dashboardHandler}>
+            
+            <button className={selectedButton == "button4" ? `${themeToggle ? 'selectedButtonLight' : 'selectedButton'}` : "button4"} id={`${themeToggle ? 'primaryButtonLight' : 'primaryButton'}`} onClick={dashboardHandler}>
                 {isActive ? <FontAwesomeIcon className="icon" icon={faHome}/> : "Dashboard"}
             </button>
-            <button className={selectedButton == "button5" ? "selectedButton" : "button5"} id="primaryButton" onClick={settingHandler}>
+            <button className={selectedButton == "button5" ? `${themeToggle ? 'selectedButtonLight' : 'selectedButton'}` : "button5"} id={`${themeToggle ? 'primaryButtonLight' : 'primaryButton'}`} onClick={settingHandler}>
                 {isActive ? <FontAwesomeIcon className="icon" icon={faCog}/> : "Settings"}
             </button>
-            <button className={`button6${isActive ? 'active' : ''}`} id="primaryButton">
+            
+            
+            <button className={selectedButton == "button7" ? `${themeToggle ? 'selectedButtonLight' : 'selectedButton'}` : "button7"} id={`${themeToggle ? 'primaryButtonLight' : 'primaryButton'}`} onClick={toggleHandler}>
+                {themeToggle ? <FontAwesomeIcon className="iconToggle" icon={faToggleOn}/> : <FontAwesomeIcon className="iconToggle" icon={faToggleOff}/>}
+            </button>
+
+            <button className={`button6${isActive ? 'active' : ''}`} id={`${themeToggle ? 'primaryButtonLight' : 'primaryButton'}`} onClick={signOutHandler}>
                 {isActive ? <FontAwesomeIcon className="icon" icon={faSignOutAlt}/> : "Signout"}
             </button>
+            
             
         </div>
     )
