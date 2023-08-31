@@ -10,11 +10,12 @@ import { BeatLoader } from 'react-spinners';
 const Signup = (props) => {
     
     const [isLoading, setIsLoading] = useState(false)
+    
     const onSubmit = async(values, actions) => {
         setIsLoading(true)
         try{
             values.Image = {userAccountImage}
-        await props.getInfo(values,"Signup")
+            await props.getInfo(values,"Signup")
         }
         catch(err){
             console.log(err)
@@ -60,6 +61,7 @@ const Signup = (props) => {
             {formik.errors.Password && formik.touched.Password && <p className="error">{formik.errors.Password}</p>}
             <br />
             <button className="primaryButton" type="submit">Sign Up</button>
+            {props.msg ? <p className="error">{props.msg}</p> : ""}
             {isLoading && <BeatLoader css={override} />}
         </form>
         </div>

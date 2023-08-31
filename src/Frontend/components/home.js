@@ -6,6 +6,7 @@ import "../Styles/style.css"
 import Sidebar from "./sidebar";
 import EditProfile from "./Forms/editProfile";
 
+
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 
 
@@ -272,6 +273,7 @@ const Home = (props) => {
                     dashboardButton = {dashboardHandler} toggleHandler = {toggleHandler} themeToggle = {themeToggle} 
                     handleToggleBar = {handleToggleBar} click={props.click} checkLength = {checkDataLength} ></Sidebar>
                 </div>
+                
               
                 {
                     taskListClicked &&
@@ -306,6 +308,7 @@ const Home = (props) => {
                     <div className={`${toggleBar ? 'col-lg-11 col-md-11 col-sm-11' : 'col-lg-10 col-md-10 col-sm-10'}`} id="taskFormContainer">
                       <div className={`${themeToggle ? 'taskFormContainerLight' : 'taskFormContainer'}`}>
                         <TaskForm accountName={accountName} getInfo = {getInfo} cancelButton = {cancelButtonHandler} type="Submit"></TaskForm>
+                        
                       </div>
                     </div> 
                 }

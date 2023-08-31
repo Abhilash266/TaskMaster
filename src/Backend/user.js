@@ -1,9 +1,10 @@
 const { MongoClient, ObjectId } = require('mongodb');
 const bcrypt = require('bcrypt');
+require('dotenv').config({ path: '../lock.env' })
 
 
-const uri = 'mongodb+srv://anatar18:Abhilash2019@cluster0.c7jsxac.mongodb.net/'
-const dbName = 'TestDB'
+const uri = process.env.URI
+const dbName = process.env.DBNAME
 const client = new MongoClient(uri, { useUnifiedTopology: true });
 
 
@@ -11,7 +12,7 @@ const client = new MongoClient(uri, { useUnifiedTopology: true });
 const checkLogin = async(email,password) => {
     try {
       const db = client.db(dbName);
-      const collection = db.collection('UserData');
+      const collection = db.collection(process.env.USER);
       const documents = await collection.find({Email:email}).toArray();
       const checkPassword = await bcrypt.compare(password,documents[0].Password)
       if(documents.length > 0 && checkPassword){
@@ -22,28 +23,18 @@ const checkLogin = async(email,password) => {
       }
       
     } catch (err) {
-      console.error('An error occurred while fetching data:', err);
+      console.error(err);
     } 
   }
 
   const signUpHandler = async(data) => {
     try{
       const db = client.db(dbName);
-      const collection = db.collection('UserData');
-      if (data.Email.length == 0 || data.Password.length == 0){
-        throw new Error("Custom error");
-      }
+      const collection = db.collection(process.env.USER);
       const hashedPassword = await bcrypt.hash(data.Password,10)
-      
-      const query = {};
-      for (const key in data) {
-        query[key] = { $eq: data[key] };
-      }
-  
-      const existingData = await collection.findOne(query);
-  
-      if (existingData){
-        console.log("Data already in database")
+      const exdata = await collection.findOne({ Email: data.Email  })
+      if (exdata){
+        return false
       }
       else{
         data.Password = hashedPassword
@@ -61,7 +52,7 @@ const checkLogin = async(email,password) => {
   const updateUserData = async(userId, image) => {
     try{
       const db = client.db(dbName);
-      const collection = db.collection('UserData');
+      const collection = db.collection(process.env.USER);
       const filter = { _id: new ObjectId(userId) };
       const update = {
         $set:  {
@@ -79,12 +70,12 @@ const checkLogin = async(email,password) => {
   const getUserData = async(userId) => {
     try{
       const db = client.db(dbName);
-      const collection = db.collection('UserData');
+      const collection = db.collection(process.env.USER);
       const user = await collection.findOne({ _id: new ObjectId(userId) });
       return user.Image.userAccountImage
     }
     catch(err){
-      console.log(err)
+      console.error(err)
     }
   }
 

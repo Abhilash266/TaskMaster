@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "../../Styles/style.css";
 import { useFormik } from "formik";
 import { TaskFormSchema } from "../../Schemas/formSchema";
@@ -33,7 +33,7 @@ const TaskForm = (props) => {
         
     })
 
-    const today = new Date().toISOString().split('T')[0];
+   
 
     const cancelButtonHandler = () => {
         props.cancelButton(type1)

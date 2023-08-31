@@ -19,7 +19,6 @@ import LoginForm from "./Forms/login";
 
 
 
-
 const Main = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [signup, setSignUp] = useState(true)
@@ -27,7 +26,8 @@ const Main = () => {
     const [userAccountImage, setUserAccountImage] = useState("")
     const [userId, setUserId] = useState("")
     const [invalidPasswordMsg, setInvalidPasswordMsg] = useState("")
-   
+    const [emailExistMsg, setEmailExistMsg] = useState("")
+
     useEffect(()=>{
       const token = localStorage.getItem('token')
       const name = localStorage.getItem('name')
@@ -44,9 +44,8 @@ const Main = () => {
     const postHandler = async(formData) => {
         try {
           const response = await axios.post('/api/signup', formData);
-          if (response){
-            console.log("rendering......") 
-          }
+          return response.data
+          
         } catch (error) {
           console.error('Failed to send data.', error);
         } 
@@ -81,8 +80,15 @@ const Main = () => {
     
     const getInfo = async(data,type) => {
         if (type === "Signup"){
-            await postHandler(data)
-            setSignUp(false)
+            const res = await postHandler(data)
+            if(res != false){
+              setSignUp(false)
+            }
+            else{
+              setEmailExistMsg("Email Already Exists")
+            }
+            
+  
         }
         else{
           const invalidMessage = await getHandler(data.Email, data.Password)
@@ -106,6 +112,7 @@ const Main = () => {
 
     return(
         <>
+        
         <div style={pageStyle}>
           <MyContext.Provider value={isLoggedIn}>
           <Header name={name} userAccountImage ={userAccountImage} click={logoutClicked} ></Header>
@@ -126,7 +133,7 @@ const Main = () => {
               signup ? 
               <div className="signupContainer">
                 <div>
-                  <Signup getInfo = {getInfo}></Signup> 
+                  <Signup getInfo = {getInfo} msg={emailExistMsg}></Signup> 
                 </div>
                 
                 <div>

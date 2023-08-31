@@ -7,7 +7,7 @@ const Cover = (props) => {
     const [taskState, setTaskState] = useState(props.taskState)
     
     const day = props.taskDate.split("-")
-    const date = day[2]
+   
     const month = day[1]
     const year = day[0]
     const themeToggle = props.themeToggle

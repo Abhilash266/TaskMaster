@@ -1,12 +1,13 @@
 const { MongoClient, ObjectId } = require('mongodb');
+require('dotenv').config({ path: '../lock.env' })
 
 
 
 
 
 
-const uri = 'mongodb+srv://anatar18:Abhilash2019@cluster0.c7jsxac.mongodb.net/'
-const dbName = 'TestDB'
+const uri = process.env.URI
+const dbName = process.env.DBNAME
 
 
 const client = new MongoClient(uri, { useUnifiedTopology: true });
@@ -15,9 +16,8 @@ const client = new MongoClient(uri, { useUnifiedTopology: true });
 const connect = async() => {
   try {
     await client.connect();
-    console.log('Connected to the MongoDB database');
   } catch (err) {
-    console.error('An error occurred while connecting to the MongoDB database:', err);
+    console.error(err);
   }
 }
 
@@ -27,12 +27,12 @@ const connect = async() => {
 const fetchData = async() => {
     try {
       const db = client.db(dbName);
-      const collection = db.collection('Tester');
+      const collection = db.collection(process.env.TESTER);
       const documents = await collection.find({}).toArray();
       return documents
       
     } catch (err) {
-      console.error('An error occurred while fetching data:', err);
+      console.error(err);
     } 
 }
 
@@ -41,7 +41,7 @@ const fetchData = async() => {
 const insertdata = async(data) => {
     try{
       const db = client.db(dbName);
-      const collection = db.collection('Tester');
+      const collection = db.collection(process.env.TESTER);
       
       const query = {};
       for (const key in data) {
@@ -71,9 +71,8 @@ const insertdata = async(data) => {
 
 const updateData = async(userId, data) => {
   try{
-    console.log(userId, data)
     const db = client.db(dbName);
-    const collection = db.collection('Tester');
+    const collection = db.collection(process.env.TESTER);
     const filter = { _id: new ObjectId(userId) };
     const update = {
       $set:  {results: data}
@@ -91,11 +90,9 @@ const updateData = async(userId, data) => {
 const deleteData = async(userId) => {
     try{
       const db = client.db(dbName);
-      const collection = db.collection('Tester');
+      const collection = db.collection(process.env.TESTER);
       const objectId = new ObjectId(userId); 
-      const result = await collection.deleteOne({ _id: objectId });
-      console.log(result)
-      
+      await collection.deleteOne({ _id: objectId });  
     }
     catch(err){
       console.error("Error.....",err)

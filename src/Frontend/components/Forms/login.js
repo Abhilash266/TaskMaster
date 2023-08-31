@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "../../Styles/style.css"
 import { useFormik } from "formik";
 import { LoginSchema } from "../../Schemas/formSchema";

@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
+require('dotenv').config({ path: '../lock.env' })
 
 const {fetchData, insertdata, deleteData, connect, updateData} = require('./crud')
 const {checkLogin, signUpHandler, updateUserData, getUserData} = require('./user')
@@ -13,7 +14,7 @@ app.use(bodyParser.json({ limit: '100mb' }));
 connect();
 
 const jwt = require('jsonwebtoken');
-const secretKey = 'your-secret-key';
+const secretKey = process.env.SECRET_KEY;
 
 
 app.get('/api/getData', async(req, res) => {
@@ -24,7 +25,6 @@ app.get('/api/getData', async(req, res) => {
 app.post('/api/login', async(req, res) => {
   const email = req.body.Email
   const password = req.body.Password
-  console.log(email,password)
   const data = await checkLogin(email,password);
   const token = jwt.sign({ id: 0 }, secretKey);
   res.set('Authorization', 'Bearer ' + token);
@@ -33,7 +33,6 @@ app.post('/api/login', async(req, res) => {
 
 app.post('/api/postData',async(req, res) => {
   const postData = req.body; 
-  console.log('Received POST data:', postData,);
   const result = await insertdata(postData);
   res.json(result)
   
@@ -41,7 +40,6 @@ app.post('/api/postData',async(req, res) => {
 
 app.post('/api/signup',async(req, res) => {
   const postData = req.body; 
-  console.log('Received POST data:', postData);
   const result = await signUpHandler(postData);
   res.json(result)  
 })
@@ -77,13 +75,6 @@ app.get('/api/getUserData/:id',(req, res) => {
 
 
 
-
-
-
-
-
-const PORT = 5000
-
-app.listen(PORT,()=>{
-    console.log(`App is running on port ${PORT}`)
+app.listen(process.env.PORT || 5000,()=>{
+    console.log(`App is running on port ${process.env.PORT}`)
 })
