@@ -1,7 +1,7 @@
 {
   "name": "my-app",
   "version": "0.1.0",
-  "proxy": "http://localhost:5000/",
+  "proxy": "https://taskmaster2023-89b283f2a6de.herokuapp.com/",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.1",
