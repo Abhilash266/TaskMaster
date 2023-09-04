@@ -1,0 +1,446 @@
+body{
+    margin: 0; 
+    padding: 0; 
+    background-color: #6D9AC4;
+    height: 100dvh;
+    /* background-color: #fff; */
+    
+
+    
+}
+.primaryButton{
+    background-color: #EE5684;
+    color: #fff;
+    margin: 10px 0 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    border-color: #EE5684;
+}
+
+/* Header Style */
+
+.headerStyle{
+    color: #fff;
+    margin-top: 10px;
+}
+#logout{
+    text-align:end
+}
+#header.container-fluid{
+    background-color: #333;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  
+  
+
+.circularContainer{
+    background: #EE5684;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;    
+}
+
+/* End Header Style */
+
+
+/* Cover Style */
+.coverContainer{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    padding: 10px;
+}
+.coverContainerDashboard{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    border: 2px solid white;
+    border-radius: 10px;
+
+}
+#newCover{
+    background-color: #949494;
+    text-align: center;
+    cursor: pointer;
+}
+#newCoverLight{
+    background-color: #ffffff;
+    text-align: center;
+    cursor: pointer;
+}
+.coverStyle{
+    background:#333;
+    color:white;
+    width:25vw;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    padding:10px;
+    min-height: 200px;
+    margin-bottom:10px
+}
+
+.coverStyle1{
+    background:#333;
+    color:white;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    padding:10px;
+    margin-bottom:10px
+}
+
+/* End Cover Style */
+
+
+/* Form Style */
+.signupContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+
+}
+.taskFormContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid white;
+    border-radius: 10px;
+    height: 100%;
+    padding: 10px;
+}
+.signupStyle{
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 50px;
+}
+.primaryButton{
+    background-color: #EE5684;
+    color: #fff;
+    margin: 10px 0 10px 0;
+    padding: 8px;
+    border-radius: 5px;
+    border: 2px solid #EE5684;
+}
+.anchorStyle{
+    border:none;
+    background: none;
+    text-decoration: underline;
+}
+
+input, textarea, select{
+    border-radius: 10px;
+    border: 2px solid #6D9AC4;
+}
+
+
+input.input-error, select.input-error, textarea.input-error{
+    border-color: #fc8181;
+}
+.error{
+    margin-bottom: -25px;
+    font-size: 80%;
+    color:#fc8181;
+}
+/* End Form Style */
+
+
+/* Sidebar Style */
+
+
+.sideBarContainer{
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+    position: relative;
+    left: 0; 
+    transition: width 0.4s ease-in-out; 
+    width: 100%;
+    border: 2px solid #fff;
+    background-color: #333;
+    border-radius: 10px;
+}
+.selectedButton {
+    border:2px solid white !important;
+    
+  }
+.sideBarContainerActive {
+    width: 100%;
+    transition: width 0.4s ease-in-out; 
+    border-radius: 10px;
+    min-height: 100dvh;
+
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    left: 0; 
+    border: 2px solid #fff;
+    background-color: #333;
+  }
+
+
+.button6active{
+    margin-top: auto !important;
+}
+.button6 {
+    margin-top: auto !important;
+}
+    
+#primaryButton{
+    background-color: #EE5684;
+    color: #fff;
+    border: 2px solid #EE5684;
+    border-radius: 10px;
+    padding:10px;
+    margin: 10px;
+    
+}
+
+
+
+#mainBar{
+    margin-top: 10px;
+    transition: width 0.4s ease-in-out; 
+}
+
+#taskFormContainer{
+    margin-top: 10px;
+    transition: width 0.4s ease-in-out; 
+}
+#dashboardContainer{
+    transition: width 0.4s ease-in-out; 
+}
+#settingsContainer{
+    margin-top: 10px;
+    transition: width 0.4s ease-in-out; 
+}
+.createTaskContainer{
+    padding: 20px;
+    border-radius: 10px;
+}
+.settingsContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    min-height: 100dvh;
+    padding: 10px;
+}
+#imageUploadContainer:hover .overlay{
+    opacity: 1;
+}
+.overlay {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay color */
+    opacity: 0;
+    transition: opacity 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    color: #fff;
+    text-align: center;
+  }
+
+
+.icon{
+    font-size: 20px;
+}
+
+.imgContainer{
+    text-align: right;
+}
+.imgContainer img{
+    border-radius: 10px;
+}
+/* End Sidebar style */
+
+
+/* Task Form style */
+
+input#Title, textarea#Description, select#Priority, input#TaskDate{
+    width:100%;
+}
+
+
+/* End Task Bar style */
+
+
+.iconToggle{
+    font-size: 50px;
+    transition: 0.7s;
+}
+.button7{
+    background: none !important;
+    border: none !important;
+    width: fit-content;
+    width: -moz-fit-content;
+}
+
+
+
+
+.pendingTasksContainer{
+    margin-top: 10px;
+    border: 2px solid #fff;
+    padding: 20px;
+    border-radius: 10px;
+    min-height: 100dvh;
+}
+.completedTasksContainer{
+    margin-top: 10px;
+    border: 2px solid #fff;
+    padding: 20px;
+    border-radius: 10px;
+    min-height: 100dvh;
+}
+
+[data-rbd-droppable-id="2"]{
+    min-height: 100dvh;
+}
+[data-rbd-droppable-id="1"]{
+    min-height: 100dvh;
+}
+
+
+
+/* LIGHT THEME */
+.pendingTasksContainerLight{
+    margin-top: 10px;
+    border: 2px solid #333;
+    padding: 20px;
+    border-radius: 10px;
+    min-height: 100dvh;
+}
+.completedTasksContainerLight{
+    margin-top: 10px;
+    border: 2px solid #333;
+    padding: 20px;
+    border-radius: 10px;
+    min-height: 100dvh;
+}
+.coverInfo{
+    border-left:2px solid #fff;
+    padding-left:10px
+}
+.coverStyle1Light{
+    background:#fff;
+    color:#333;
+    border: 2px solid #333;
+    border-radius: 10px;
+    padding:10px;
+    margin-bottom:10px;
+}
+.coverStyleLight{
+    background:#fff;
+    color:#333;
+    width:25vw;
+    border: 2px solid #333;
+    border-radius: 10px;
+    padding:10px;
+    margin-bottom:10px;
+    min-height: 200px;
+}
+.coverContainerLight{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    border: 2px solid #333;
+    border-radius: 10px;
+    padding: 10px;
+}
+.createTaskContainerLight{
+    padding: 20px;
+    border: 2px solid #333;
+    border-radius: 10px;
+}
+.settingsContainerLight{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid #333;
+    border-radius: 10px;
+    min-height: 100dvh;
+    padding: 10px;
+}
+
+.taskFormContainerLight{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid #333;
+    border-radius: 10px;
+    min-height: 100dvh;
+    padding: 10px;
+}
+
+
+#primaryButtonLight{
+    background-color: #fff;
+    color: #EE5684;
+    border: 2px solid #333;
+    border-radius: 10px;
+    padding:10px;
+    margin: 10px;
+    
+}
+
+.sideBarContainerLight{
+    display: flex;
+    flex-direction: column;
+    background-color: aliceblue;
+    min-height: 100dvh;
+    position: relative;
+    left: 0; 
+    transition: width 0.4s ease-in-out; 
+    width: 100%;
+    border: 2px solid #333;
+    background-color: #fff;
+    border-radius: 10px;
+}
+.sideBarContainerActiveLight {
+    width: 100%;
+    transition: width 0.4s ease-in-out; 
+    border-radius: 10px;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    left: 0; 
+    border: 2px solid #333;
+    background-color: #fff;
+  }
+
+.selectedButtonLight {
+    border:2px solid #EE5684 !important;
+  }
+.coverInfoLight{
+    border-left:2px solid #333;
+    padding-left:10px
+}
+
+
+
+
+
+
+
+
+
+
+
+
