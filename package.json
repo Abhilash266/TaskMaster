@@ -42,7 +42,7 @@
     "yup": "^1.2.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "cd src/Backend && node home.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
