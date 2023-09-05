@@ -1,7 +1,7 @@
 {
   "name": "my-app",
   "version": "0.1.0",
-  "proxy": "http://localhost:5000/",
+  "proxy": "https://taskmaster-backend-ggby.onrender.com/",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -42,7 +42,7 @@
     "yup": "^1.2.0"
   },
   "scripts": {
-    "start": "cd src/Backend && node home.js",
+    "start": "react-scripts start",
     "build": "npm install && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
