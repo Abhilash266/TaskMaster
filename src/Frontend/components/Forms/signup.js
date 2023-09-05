@@ -2,7 +2,7 @@ import React from "react";
 import "../../Styles/style.css"
 import { useFormik } from "formik";
 import { SignupSchema } from "../../Schemas/formSchema";
-import userAccountImage from "../../../Backend/Images/img5.avif"
+import userAccountImage from "../../../Frontend/img5.avif"
 import { useState } from "react";
 import { css } from '@emotion/react';
 import { BeatLoader } from 'react-spinners';
