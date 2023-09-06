@@ -1,10 +1,11 @@
 const { MongoClient, ObjectId } = require('mongodb');
 const bcrypt = require('bcrypt');
-require('dotenv').config({ path: '../lock.env' })
+require('dotenv').config({ path: './lock.env' })
 
 
 const uri = process.env.URI
 const dbName = process.env.DBNAME
+
 const client = new MongoClient(uri, { useUnifiedTopology: true });
 
 

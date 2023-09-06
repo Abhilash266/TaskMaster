@@ -3,10 +3,10 @@ const path = require('path');
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
-require('dotenv').config({ path: '../lock.env' })
+require('dotenv').config()
 
-const {fetchData, insertdata, deleteData, connect, updateData} = require('./crud')
-const {checkLogin, signUpHandler, updateUserData, getUserData} = require('./user')
+const {fetchData, insertdata, deleteData, connect, updateData} = require('./src/Backend/crud')
+const {checkLogin, signUpHandler, updateUserData, getUserData} = require('./src/Backend/user')
 
 app.use(cors());
 app.use(bodyParser.json({ limit: '100mb' }));

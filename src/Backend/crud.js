@@ -1,5 +1,5 @@
 const { MongoClient, ObjectId } = require('mongodb');
-require('dotenv').config({ path: '../lock.env' })
+require('dotenv').config({ path: './lock.env' })
 
 
 
