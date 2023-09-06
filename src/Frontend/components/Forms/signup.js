@@ -2,7 +2,7 @@ import React from "react";
 import "../../Styles/style.css"
 import { useFormik } from "formik";
 import { SignupSchema } from "../../Schemas/formSchema";
-import userAccountImage from "../../../Backend/Images/img5.avif"
+import userAccountImage from "../../Images/img5.avif"
 import { useState } from "react";
 import { css } from '@emotion/react';
 import { BeatLoader } from 'react-spinners';
@@ -11,14 +11,14 @@ const Signup = (props) => {
     
     const [isLoading, setIsLoading] = useState(false)
     
-    const onSubmit = async(values, actions) => {
+    const onSubmit = async(values) => {
         setIsLoading(true)
         try{
             values.Image = {userAccountImage}
             await props.getInfo(values,"Signup")
         }
         catch(err){
-            console.log(err)
+            console.log("")
         }
         finally{
             setIsLoading(false)

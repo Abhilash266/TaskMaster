@@ -57,7 +57,7 @@ const Main = () => {
             Email : email,
             Password: password
           })
-          console.log(userData)
+         
           if(userData.data[0] === true){
             const token = userData.headers.authorization;
             localStorage.setItem('token', token);

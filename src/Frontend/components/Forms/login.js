@@ -17,7 +17,7 @@ const LoginForm = (props) => {
         actions.resetForm()
         }
         catch(err){
-            console.log(err)
+            console.log("")
         }
         finally{
             setIsLoading(false)

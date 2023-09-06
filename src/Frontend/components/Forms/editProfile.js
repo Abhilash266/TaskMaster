@@ -51,12 +51,10 @@ const EditProfile = (props) => {
 
     const saveUpload = async(data) => {
       try{
-        console.log(data)
-          const res = await axios.put(`/api/updateUserData/${userAccountId}`,data)
-          console.log(res)
+          await axios.put(`/api/updateUserData/${userAccountId}`,data)
       }
       catch(err){
-          console.log(err)
+          console.log("")
       }
     }
     const handleSubmit = async(event) => {
@@ -71,7 +69,7 @@ const EditProfile = (props) => {
           localStorage.setItem("userImage",JSON.stringify(image))
         }
         catch(err){
-          console.log(err)
+          console.log("")
         }
         finally{
           setIsUploaded(false)

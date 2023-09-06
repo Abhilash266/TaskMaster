@@ -77,16 +77,11 @@ const Home = (props) => {
        
         const response = await axios.post('/api/postData', data);
         if (response){
-          console.log("rendering......")
           formData._id = response.data._id
-          console.log(formData)
-          console.log("Not here please")
           await postObject(data)
-          
-          
         }
       } catch (error) {
-        console.error('Failed to send data.', error);
+        console.error("");
       } 
     }
 
@@ -95,28 +90,25 @@ const Home = (props) => {
         const id = data[index]._id
         const finalData = await {_id:id,results: taskData}
         const updateId = id
-        console.log(taskData,id)
+        
         
         const response = await axios.put(`/api/updateData/${updateId}`, finalData.results);
         if (response){
-          console.log(response)
           await putObject(index, finalData)
-          
         }
       } catch (error) {
-        console.error('Failed to send data.', error);
+        console.error("");
       } 
     }
 
     const deleteHandler = async(ind) => {
       try{
         const deleteId = data[ind]._id
-        console.log(deleteId)
         await axios.delete(`/api/deleteData/${deleteId}`)
         await deleteObject(ind)
       }
       catch(err){
-        console.log("Not deleted")
+        console.log("")
       }
     }
 
@@ -124,7 +116,6 @@ const Home = (props) => {
     const getInfo = async(data,type) => {
       
       if (type === "Edit"){
-        console.log(data)
         await putHandler(data, editId)
         setEditTaskClicked(false)
         setTaskListClicked(true)
@@ -227,7 +218,6 @@ const Home = (props) => {
   const handleDragEnd = (result) => {
     const ind = result.source.index
     if(result.source.droppableId == result.destination.droppableId){
-      console.log("no")
       return
     }
     else{
