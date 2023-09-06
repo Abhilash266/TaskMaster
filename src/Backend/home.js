@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -71,6 +72,11 @@ app.get('/api/getUserData/:id',(req, res) => {
   res.send(data)
 })
 
+app.use(express.static(path.join(__dirname, 'build')));
+
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 
 
