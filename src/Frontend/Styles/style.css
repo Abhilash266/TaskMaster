@@ -434,9 +434,28 @@ input#Title, textarea#Description, select#Priority, input#TaskDate{
 }
 
 
+.hidden {
+    display: none;
+  }
 
+  .errorImage-container {
+    height: 100vh; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+}
+.errorImg{
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+}
 
-
+@media screen and (max-width: 480px) {
+    .mobile-message {
+      display: block;
+    }
+  }
 
 
 

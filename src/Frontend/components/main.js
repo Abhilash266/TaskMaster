@@ -20,6 +20,7 @@ import LoginForm from "./Forms/login";
 
 
 const Main = () => {
+    const isMobile = window.innerWidth <= 800;
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [signup, setSignUp] = useState(true)
     const [name, setName] = useState("")
@@ -112,6 +113,13 @@ const Main = () => {
 
     return(
         <>
+        {
+          isMobile ? 
+          <div className={`mobile-message ${isMobile ? '' : 'hidden'}`}>
+              <h3 style={{display:"flex",height:"100vh",justifyContent:"center",alignItems:"center",textAlign:"center"}}>Please open this site on a larger screen for better experience.</h3>
+          </div>
+          
+          :
         
         <div style={pageStyle}>
           <MyContext.Provider value={isLoggedIn}>
@@ -162,6 +170,7 @@ const Main = () => {
         
         
         </div>
+        }
         </>
     )
 }
