@@ -258,7 +258,7 @@ const Home = (props) => {
         <div className="container-fluid">
             <div className="row">
             
-                <div className={`${toggleBar ? 'col-lg-1 col-md-1 col-sm-3' : 'col-lg-2 col-md-2 col-sm-4'}`} id="mainBar">
+                <div className={`${toggleBar ? 'col-lg-1 col-md-3 col-sm-3' : 'col-lg-2 col-md-4 col-sm-4'}`} id="mainBar">
                     <Sidebar createButton = {createButtonHandler} taskButton = {taskListHandler} settingButton = {settingHandler} 
                     dashboardButton = {dashboardHandler} toggleHandler = {toggleHandler} themeToggle = {themeToggle} 
                     handleToggleBar = {handleToggleBar} click={props.click} checkLength = {checkDataLength} ></Sidebar>
@@ -268,7 +268,7 @@ const Home = (props) => {
                 {
                     taskListClicked &&
                     
-                    <div className={`${toggleBar ? 'col-lg-11 col-md-11 col-sm-11' : 'col-lg-10 col-md-10 col-sm-10'}`} id="mainBar">
+                    <div className={`${toggleBar ? 'col-lg-11 col-md-9 col-sm-9' : 'col-lg-10 col-md-8 col-sm-8'}`} id="mainBar">
                       <div className={`${themeToggle ? 'coverContainerLight' : 'coverContainer'}`}>
                       {checkDataLength() == 0 ? <h3 style={{marginTop:"10px"}}>Create your first task</h3> :
                     data.map((item, ind) => (
@@ -295,7 +295,7 @@ const Home = (props) => {
                 
                 {
                     createTaskClicked &&
-                    <div className={`${toggleBar ? 'col-lg-11 col-md-11 col-sm-11' : 'col-lg-10 col-md-10 col-sm-10'}`} id="taskFormContainer">
+                    <div className={`${toggleBar ? 'col-lg-11 col-md-9 col-sm-9' : 'col-lg-10 col-md-8 col-sm-8'}`} id="taskFormContainer">
                       <div className={`${themeToggle ? 'taskFormContainerLight' : 'taskFormContainer'}`}>
                         <TaskForm accountName={accountName} getInfo = {getInfo} cancelButton = {cancelButtonHandler} type="Submit"></TaskForm>
                         
@@ -305,7 +305,7 @@ const Home = (props) => {
                 
                 {
                   editTaskClicked &&
-                  <div className={`${toggleBar ? 'col-lg-11 col-md-11 col-sm-11' : 'col-lg-10 col-md-10 col-sm-10'}`} id="taskFormContainer">
+                  <div className={`${toggleBar ? 'col-lg-11 col-md-9 col-sm-9' : 'col-lg-10 col-md-8 col-sm-8'}`} id="taskFormContainer">
                     <div className={`${themeToggle ? 'taskFormContainerLight' : 'taskFormContainer'}`} >
                       <TaskForm accountName={accountName} getInfo = {getInfo} cancelButton = {cancelButtonHandler} title = {title} description = {description} priority = {priority} taskDate = {taskDate} type="Edit"></TaskForm>
                     </div>
@@ -316,7 +316,7 @@ const Home = (props) => {
                 
                 {
                   dashboardClicked &&
-                  <div className={`${toggleBar ? 'col-lg-11 col-md-11 col-sm-11' : 'col-lg-10 col-md-10 col-sm-10'}`} id="dashboardContainer">
+                  <div className={`${toggleBar ? 'col-lg-11 col-md-9 col-sm-9' : 'col-lg-10 col-md-8 col-sm-8'}`} id="dashboardContainer">
                     <div className="row">
                     
                     {checkDataLength() == 0 ? 
@@ -408,7 +408,7 @@ const Home = (props) => {
 
                 {
                   settingClicked &&
-                  <div className={`${toggleBar ? 'col-lg-11 col-md-11 col-sm-11' : 'col-lg-10 col-md-10 col-sm-10'}`} id="settingsContainer">
+                  <div className={`${toggleBar ? 'col-lg-11 col-md-9 col-sm-9' : 'col-lg-10 col-md-8 col-sm-8'}`} id="settingsContainer">
                     <div className={`${themeToggle ? 'settingsContainerLight' : 'settingsContainer'}`}>
                     <EditProfile name = {props.accountName} userAccountImage = {props.userAccountImage} userAccountId = {props.userAccountId}></EditProfile>
                     </div>
