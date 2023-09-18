@@ -18,8 +18,6 @@ const Header = (props) => {
         backgroundImage: `url(${image})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
-        float:"left",
-        
       }
     
   
@@ -27,14 +25,14 @@ const Header = (props) => {
         <div className="container-fluid" id="header"> 
             <header className="headerStyle">
                     { props.name ? 
-                        <div>
+                        <div className="thumbnailTextContainer">
                             <div className="circleContainer" style={circleStyle}></div>
-                            <h3 style={{float:"left", margin: "5px 0 0 15px"}}>Welcome {props.name}</h3>
+                            <h3 style={{marginLeft:"0.5em"}}>Welcome {props.name}</h3>
                         </div> : <h3>Task Master</h3> }
                 
-                <div>
-                    { value && <h3 onClick={props.click} style={{float:"right", cursor:"pointer"}}>Logout</h3>}
-                </div>
+                    <div className="logoutContainer">
+                        { value && <h3 onClick={props.click} style={{cursor:"pointer"}}>Logout</h3>}
+                    </div>
             </header>
         </div>
     )

@@ -2,7 +2,7 @@ body{
     margin: 0; 
     padding: 0; 
     background-color: #6D9AC4;
-    height: 100dvh;
+    min-height: 100vh;
     /* background-color: #fff; */
     
 
@@ -21,13 +21,17 @@ body{
 
 .headerStyle{
     color: #fff;
-    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 #logout{
     text-align:end
 }
 #header.container-fluid{
     background-color: #333;
+    
+    
 }
 
 .dropdown {
@@ -36,7 +40,13 @@ body{
   }
   
   
-  
+  .thumbnailTextContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 0 5px 0;
+
+  }
 
 .circularContainer{
     background: #EE5684;
@@ -56,6 +66,7 @@ body{
     border: 2px solid #fff;
     border-radius: 10px;
     padding: 10px;
+    min-height: 90vh;
 }
 .coverContainerDashboard{
     display: flex;
@@ -107,7 +118,7 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    min-height: 90vh;
 
 }
 .taskFormContainer{
@@ -116,7 +127,7 @@ body{
     align-items: center;
     border: 2px solid white;
     border-radius: 10px;
-    height: 100%;
+    min-height: 90vh;
     padding: 10px;
 }
 .signupStyle{
@@ -161,7 +172,7 @@ input.input-error, select.input-error, textarea.input-error{
 .sideBarContainer{
     display: flex;
     flex-direction: column;
-    min-height: 100dvh;
+    min-height: 90vh;
     position: relative;
     left: 0; 
     transition: width 0.4s ease-in-out; 
@@ -178,7 +189,7 @@ input.input-error, select.input-error, textarea.input-error{
     width: 100%;
     transition: width 0.4s ease-in-out; 
     border-radius: 10px;
-    min-height: 100dvh;
+    min-height: 90vh;
 
     display: flex;
     flex-direction: column;
@@ -234,7 +245,7 @@ input.input-error, select.input-error, textarea.input-error{
     align-items: center;
     border: 2px solid #fff;
     border-radius: 10px;
-    min-height: 100dvh;
+    min-height: 90vh;
     padding: 10px;
 }
 #imageUploadContainer:hover .overlay{
@@ -362,6 +373,7 @@ input#Title, textarea#Description, select#Priority, input#TaskDate{
     border: 2px solid #333;
     border-radius: 10px;
     padding: 10px;
+    min-height: 90vh;
 }
 .createTaskContainerLight{
     padding: 20px;
@@ -374,7 +386,7 @@ input#Title, textarea#Description, select#Priority, input#TaskDate{
     align-items: center;
     border: 2px solid #333;
     border-radius: 10px;
-    min-height: 100dvh;
+    min-height: 90vh;
     padding: 10px;
 }
 
@@ -384,7 +396,7 @@ input#Title, textarea#Description, select#Priority, input#TaskDate{
     align-items: center;
     border: 2px solid #333;
     border-radius: 10px;
-    min-height: 100dvh;
+    min-height: 90vh;
     padding: 10px;
 }
 
@@ -403,7 +415,7 @@ input#Title, textarea#Description, select#Priority, input#TaskDate{
     display: flex;
     flex-direction: column;
     background-color: aliceblue;
-    min-height: 100dvh;
+    min-height: 90vh;
     position: relative;
     left: 0; 
     transition: width 0.4s ease-in-out; 
@@ -416,7 +428,7 @@ input#Title, textarea#Description, select#Priority, input#TaskDate{
     width: 100%;
     transition: width 0.4s ease-in-out; 
     border-radius: 10px;
-    min-height: 100dvh;
+    min-height: 90vh;
     display: flex;
     flex-direction: column;
     position: relative;
