@@ -62,7 +62,7 @@ body{
 .coverContainer{
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    justify-content: space-between;
     border: 2px solid #fff;
     border-radius: 10px;
     padding: 10px;
@@ -93,6 +93,7 @@ body{
     background:#333;
     color:white;
     width:25vw;
+    flex: 0 0 calc(33.33% - 10px);
     border: 2px solid #fff;
     border-radius: 10px;
     padding:10px;
@@ -106,6 +107,7 @@ body{
     border: 2px solid #fff;
     border-radius: 10px;
     padding:10px;
+    flex: 0 0 calc(33.33% - 10px);
     margin-bottom:10px
 }
 
@@ -298,8 +300,7 @@ input#Title, textarea#Description, select#Priority, input#TaskDate{
 .button7{
     background: none !important;
     border: none !important;
-    width: fit-content;
-    width: -moz-fit-content;
+    
 }
 
 
@@ -310,23 +311,34 @@ input#Title, textarea#Description, select#Priority, input#TaskDate{
     border: 2px solid #fff;
     padding: 20px;
     border-radius: 10px;
-    min-height: 100dvh;
+    min-height: 90vh;
 }
 .completedTasksContainer{
     margin-top: 10px;
     border: 2px solid #fff;
     padding: 20px;
     border-radius: 10px;
-    min-height: 100dvh;
+    min-height: 90vh;
 }
 
 [data-rbd-droppable-id="2"]{
-    min-height: 100dvh;
+    min-height: 90vh;
 }
 [data-rbd-droppable-id="1"]{
-    min-height: 100dvh;
+    min-height: 90vh;
 }
-
+.noTaskContainer{
+    min-height: 90vh;
+    border: 2px solid white;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+.noTaskContainerLight{
+    min-height: 90vh;
+    border: 2px solid #333;
+    border-radius: 10px;
+    margin-top: 10px;
+}
 
 
 /* LIGHT THEME */
@@ -335,14 +347,14 @@ input#Title, textarea#Description, select#Priority, input#TaskDate{
     border: 2px solid #333;
     padding: 20px;
     border-radius: 10px;
-    min-height: 100dvh;
+    min-height: 90vh;
 }
 .completedTasksContainerLight{
     margin-top: 10px;
     border: 2px solid #333;
     padding: 20px;
     border-radius: 10px;
-    min-height: 100dvh;
+    min-height: 90vh;
 }
 .coverInfo{
     border-left:2px solid #fff;
@@ -355,9 +367,11 @@ input#Title, textarea#Description, select#Priority, input#TaskDate{
     border-radius: 10px;
     padding:10px;
     margin-bottom:10px;
+    flex: 0 0 calc(33.33% - 10px);
 }
 .coverStyleLight{
     background:#fff;
+    flex: 0 0 calc(33.33% - 10px);
     color:#333;
     width:25vw;
     border: 2px solid #333;
@@ -369,7 +383,7 @@ input#Title, textarea#Description, select#Priority, input#TaskDate{
 .coverContainerLight{
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    justify-content: space-between;
     border: 2px solid #333;
     border-radius: 10px;
     padding: 10px;

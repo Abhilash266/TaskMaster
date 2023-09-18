@@ -319,7 +319,11 @@ const Home = (props) => {
                   <div className={`${toggleBar ? 'col-lg-11 col-md-11 col-sm-11' : 'col-lg-10 col-md-10 col-sm-10'}`} id="dashboardContainer">
                     <div className="row">
                     
-                    {checkDataLength() == 0 ? <h3 style={{marginTop:"10px"}}>You are yet to create a task</h3> :
+                    {checkDataLength() == 0 ? 
+                    
+                    <div className={`${themeToggle ? 'noTaskContainerLight' : 'noTaskContainer'}`}><h3 style={{marginTop:"10px"}}>You are yet to create a task</h3>
+                    </div> 
+                    :
                     <DragDropContext onDragEnd={handleDragEnd}>
                       <div className={`${toggleBar ? 'col-lg-6 col-md-6 col-sm-3' : 'col-lg-6 col-md-6 col-sm-3'}`}>
                         <div className={`${themeToggle ? 'pendingTasksContainerLight' : 'pendingTasksContainer'}`}>
