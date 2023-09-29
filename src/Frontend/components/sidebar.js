@@ -11,8 +11,8 @@ import { faArrowLeft, faArrowRight, faPencilAlt, faTasks, faHome, faCog, faSignO
 
 
 const Sidebar = (props) => {
-
-    const [isActive, setIsActive] = useState(false)
+    const isMobile = window.innerWidth <= 899;
+    const [isActive, setIsActive] = useState(true)
     const [selectedButton, setSelectedButton] = useState("button3");
     const themeToggle = props.themeToggle
     
@@ -52,10 +52,14 @@ const Sidebar = (props) => {
     
     return(
         <div className={`${isActive ? `${themeToggle ? 'sideBarContainerActiveLight' : 'sideBarContainerActive'}` : `${themeToggle ? 'sideBarContainerLight' : 'sideBarContainer'}`}`}>
-            <button className="button1" id={`${themeToggle ? 'primaryButtonLight' : 'primaryButton'}`} 
+            { !isMobile &&
+                <button className="button1" id={`${themeToggle ? 'primaryButtonLight' : 'primaryButton'}`} 
             onClick={toggleSidebar}>
-            {isActive ? <FontAwesomeIcon className="icon" icon={faArrowRight} /> : <FontAwesomeIcon className="icon" icon={faArrowLeft} />}
-            </button>
+            {
+                isActive ? <FontAwesomeIcon className="icon" icon={faArrowRight} /> : <FontAwesomeIcon className="icon" icon={faArrowLeft} />
+            }
+            
+            </button>}
             <button className={selectedButton == "button2" ? `${themeToggle ? 'selectedButtonLight' : 'selectedButton'}` : "button2"} id={`${themeToggle ? 'primaryButtonLight' : 'primaryButton'}`} onClick={createButtonHandler}>
                 {isActive ? <FontAwesomeIcon className="icon" icon={faPencilAlt} /> : "Create Task"}
             </button>

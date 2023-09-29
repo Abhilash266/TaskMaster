@@ -100,6 +100,7 @@ const deleteData = async(userId) => {
   
   }
 
+
   module.exports = {
     fetchData,
     insertdata,

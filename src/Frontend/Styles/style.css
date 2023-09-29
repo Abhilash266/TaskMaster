@@ -62,8 +62,8 @@ body{
 .coverContainer{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
     border: 2px solid #fff;
+    align-content: baseline;
     border-radius: 10px;
     padding: 10px;
     min-height: 90vh;
@@ -93,7 +93,7 @@ body{
     background:#333;
     color:white;
     width:25vw;
-    flex: 0 0 calc(33.33% - 10px);
+    flex: 0 0 calc(33.33%);
     border: 2px solid #fff;
     border-radius: 10px;
     padding:10px;
@@ -107,7 +107,7 @@ body{
     border: 2px solid #fff;
     border-radius: 10px;
     padding:10px;
-    flex: 0 0 calc(33.33% - 10px);
+    flex: 0 0 calc(33.33%);
     margin-bottom:10px
 }
 
@@ -273,6 +273,10 @@ input.input-error, select.input-error, textarea.input-error{
 .icon{
     font-size: 20px;
 }
+.iconToggle{
+    font-size: 2vw;
+    transition: 0.7s;
+}
 
 .imgContainer{
     text-align: right;
@@ -293,10 +297,7 @@ input#Title, textarea#Description, select#Priority, input#TaskDate{
 /* End Task Bar style */
 
 
-.iconToggle{
-    font-size: 50px;
-    transition: 0.7s;
-}
+
 .button7{
     background: none !important;
     border: none !important;
@@ -321,12 +322,12 @@ input#Title, textarea#Description, select#Priority, input#TaskDate{
     min-height: 90vh;
 }
 
-[data-rbd-droppable-id="2"]{
+/* [data-rbd-droppable-id="2"]{
     min-height: 90vh;
 }
 [data-rbd-droppable-id="1"]{
     min-height: 90vh;
-}
+} */
 .noTaskContainer{
     min-height: 90vh;
     border: 2px solid white;
@@ -367,11 +368,11 @@ input#Title, textarea#Description, select#Priority, input#TaskDate{
     border-radius: 10px;
     padding:10px;
     margin-bottom:10px;
-    flex: 0 0 calc(33.33% - 10px);
+    flex: 0 0 calc(33.33%);
 }
 .coverStyleLight{
     background:#fff;
-    flex: 0 0 calc(33.33% - 10px);
+    flex: 0 0 calc(33.33% );
     color:#333;
     width:25vw;
     border: 2px solid #333;
@@ -383,10 +384,10 @@ input#Title, textarea#Description, select#Priority, input#TaskDate{
 .coverContainerLight{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
     border: 2px solid #333;
     border-radius: 10px;
     padding: 10px;
+    align-content: baseline;
     min-height: 90vh;
 }
 .createTaskContainerLight{
@@ -486,6 +487,28 @@ input#Title, textarea#Description, select#Priority, input#TaskDate{
 
 
 
+  @media (max-width: 1005px) {
+    h6{
+        font-size: 0.9rem;
+    }
+    h5{
+        font-size: 1.1rem;
+    }
+    #primaryButton {
+        font-size: 0.8rem;
+    }
+}
 
+@media (max-width: 750px) {
+    h6{
+        font-size: 0.8rem;
+    }
+    h5{
+        font-size: 1rem;
+    }
+    #primaryButton {
+        font-size: 0.72rem;
+    }
+}
 
 

@@ -14,7 +14,6 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 
 
 const Home = (props) => {
-
     const [data, setData] = useState([])
     
     const [createTaskClicked, setCreateTaskClicked] = useState(false)
@@ -258,7 +257,7 @@ const Home = (props) => {
         <div className="container-fluid">
             <div className="row">
             
-                <div className={`${toggleBar ? 'col-lg-1 col-md-3 col-sm-3' : 'col-lg-2 col-md-4 col-sm-4'}`} id="mainBar">
+                <div className={`${toggleBar ? 'col-lg-2 col-md-2 col-sm-2' : 'col-lg-1 col-md-2 col-sm-2'}`} id="mainBar">
                     <Sidebar createButton = {createButtonHandler} taskButton = {taskListHandler} settingButton = {settingHandler} 
                     dashboardButton = {dashboardHandler} toggleHandler = {toggleHandler} themeToggle = {themeToggle} 
                     handleToggleBar = {handleToggleBar} click={props.click} checkLength = {checkDataLength} ></Sidebar>
@@ -268,7 +267,7 @@ const Home = (props) => {
                 {
                     taskListClicked &&
                     
-                    <div className={`${toggleBar ? 'col-lg-11 col-md-9 col-sm-9' : 'col-lg-10 col-md-8 col-sm-8'}`} id="mainBar">
+                    <div className={`${toggleBar ? 'col-lg-10 col-md-10 col-sm-10' : 'col-lg-11 col-md-10 col-sm-10'}`} id="mainBar">
                       <div className={`${themeToggle ? 'coverContainerLight' : 'coverContainer'}`}>
                       {checkDataLength() == 0 ? <h3 style={{marginTop:"10px"}}>Create your first task</h3> :
                     data.map((item, ind) => (
@@ -283,11 +282,11 @@ const Home = (props) => {
                         </div>
                     ))
                       }
-                      {
+                      {/* {
                         checkDataLength() != 0 && <div className={`${themeToggle ? 'coverStyleLight' : 'coverStyle'}`} id={`${themeToggle ? 'newCoverLight' : 'newCover'}`} onClick={createButtonHandler}>
                           <h3>Create New Task</h3>
                           </div>
-                      }
+                      } */}
                         
                       </div>
                 </div>
@@ -295,7 +294,7 @@ const Home = (props) => {
                 
                 {
                     createTaskClicked &&
-                    <div className={`${toggleBar ? 'col-lg-11 col-md-9 col-sm-9' : 'col-lg-10 col-md-8 col-sm-8'}`} id="taskFormContainer">
+                    <div className={`${toggleBar ? 'col-lg-10 col-md-10 col-sm-10' : 'col-lg-11 col-md-10 col-sm-10'}`} id="taskFormContainer">
                       <div className={`${themeToggle ? 'taskFormContainerLight' : 'taskFormContainer'}`}>
                         <TaskForm accountName={accountName} getInfo = {getInfo} cancelButton = {cancelButtonHandler} type="Submit"></TaskForm>
                         
@@ -305,7 +304,7 @@ const Home = (props) => {
                 
                 {
                   editTaskClicked &&
-                  <div className={`${toggleBar ? 'col-lg-11 col-md-9 col-sm-9' : 'col-lg-10 col-md-8 col-sm-8'}`} id="taskFormContainer">
+                  <div className={`${toggleBar ? 'col-lg-10 col-md-10 col-sm-10' : 'col-lg-11 col-md-10 col-sm-10'}`} id="taskFormContainer">
                     <div className={`${themeToggle ? 'taskFormContainerLight' : 'taskFormContainer'}`} >
                       <TaskForm accountName={accountName} getInfo = {getInfo} cancelButton = {cancelButtonHandler} title = {title} description = {description} priority = {priority} taskDate = {taskDate} type="Edit"></TaskForm>
                     </div>
@@ -316,7 +315,7 @@ const Home = (props) => {
                 
                 {
                   dashboardClicked &&
-                  <div className={`${toggleBar ? 'col-lg-11 col-md-9 col-sm-9' : 'col-lg-10 col-md-8 col-sm-8'}`} id="dashboardContainer">
+                  <div className={`${toggleBar ? 'col-lg-10 col-md-10 col-sm-10' : 'col-lg-11 col-md-10 col-sm-10'}`} id="dashboardContainer">
                     <div className="row">
                     
                     {checkDataLength() == 0 ? 
@@ -338,10 +337,10 @@ const Home = (props) => {
                                             <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} isDragging={snapshot.isDragging}>
                                               <div className={`${themeToggle ? 'coverStyle1Light' : 'coverStyle1'}`} id={ind} key={ind}>
                                                   <div>
-                                                      <Cover index={ind} themeToggle = {themeToggle} title={item.results.Title} description={item.results.Description} 
+                                                      <Cover index={ind} themeToggle = {themeToggle} title={item.results.Title}  
                                                       priority={item.results.Priority} taskDate={item.results.TaskDate} 
                                                       taskState = {item.results.TaskState} taskStateChanged = {taskStateChanged}
-                                                      editHandler={editHandler} deleteHandler={deleteHandler}></Cover>
+                                                      editHandler={editHandler} deleteHandler={deleteHandler} container={"Dashboard"}></Cover>
                                                   </div>
                                               </div>
                                               
@@ -374,7 +373,7 @@ const Home = (props) => {
                                             <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} isDragging={snapshot.isDragging}>
                                               <div className={`${themeToggle ? 'coverStyle1Light' : 'coverStyle1'}`} id={ind} key={ind}>
                                                   <div>
-                                                      <Cover index={ind} title={item.results.Title} description={item.results.Description} 
+                                                      <Cover index={ind} title={item.results.Title} 
                                                       priority={item.results.Priority} taskDate={item.results.TaskDate} 
                                                       taskState = {item.results.TaskState} taskStateChanged = {taskStateChanged}
                                                       editHandler={editHandler} deleteHandler={deleteHandler} themeToggle = {themeToggle}></Cover>
@@ -408,7 +407,7 @@ const Home = (props) => {
 
                 {
                   settingClicked &&
-                  <div className={`${toggleBar ? 'col-lg-11 col-md-9 col-sm-9' : 'col-lg-10 col-md-8 col-sm-8'}`} id="settingsContainer">
+                  <div className={`${toggleBar ? 'col-lg-10 col-md-10 col-sm-10' : 'col-lg-11 col-md-10 col-sm-10'}`} id="settingsContainer">
                     <div className={`${themeToggle ? 'settingsContainerLight' : 'settingsContainer'}`}>
                     <EditProfile name = {props.accountName} userAccountImage = {props.userAccountImage} userAccountId = {props.userAccountId}></EditProfile>
                     </div>

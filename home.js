@@ -3,6 +3,9 @@ const path = require('path');
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const  OpenAI  = require('openai');
+
+
 require('dotenv').config()
 
 const {fetchData, insertdata, deleteData, connect, updateData} = require('./src/Backend/crud')
@@ -71,6 +74,34 @@ app.get('/api/getUserData/:id',(req, res) => {
   const data = getUserData(ID)
   res.send(data)
 })
+
+// This code is for v4 of the openai package: npmjs.com/package/openai
+
+const openai = new OpenAI({
+  apiKey: process.env.CHAT_GPT_API_KEY,
+});
+
+app.post("/api/chatgpt", async(req, res) => {
+  const gptInput = { prompt: req.body.prompt + ". Give instructions on how to complete the given task and the output should not exceed 400 characters."}
+  const {prompt} = gptInput
+  try{
+    const response = await openai.chat.completions.create({
+      model: "gpt-3.5-turbo",
+      messages: [{ "role": "assistant", "content": prompt}],
+      temperature: 1,
+      max_tokens: 256,
+      top_p: 1,
+      frequency_penalty: 0,
+      presence_penalty: 0,
+    });
+    res.send(response.choices[0].message.content)
+
+  }
+  catch(err){
+    res.status(500).send(err)
+  }
+})
+
 
 app.use(express.static(path.join(__dirname, 'build')));
 

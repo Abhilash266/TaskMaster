@@ -1,24 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../Styles/style.css";
 import { useFormik } from "formik";
 import { TaskFormSchema } from "../../Schemas/formSchema";
+import axios from 'axios';
+import { css } from '@emotion/react';
+import { BeatLoader } from 'react-spinners';
+
 
 
 
 const TaskForm = (props) => {
-    
+    const [isLoading, setIsLoading] = useState(false)
     const type1 = props.type
     const accountName = props.accountName
     const title = props.title
-    const description = props.description
+    const [description, setDescription] = useState(props.description)
     const taskDate = props.taskDate
     const priority = props.priority
     
+   
+    const handleAskQuestion = async () => {
+        setIsLoading(true)
+        try {
+          const response = await axios.post('/api/chatgpt',{prompt: formik.values.Title} );
+          await setDescription(response.data)
+          formik.values.Description = response.data
+        } catch (err) {
+          console.log("");
+        }
+        finally{  
+            setIsLoading(false)
+        }
+      };
 
     const onSubmit = async(values) => {
-        values.AccountName = accountName
-        values.TaskState = "Pending"
-        await props.getInfo(values,type1)
+        try{
+            values.AccountName = accountName
+            values.TaskState = "Pending"
+            await props.getInfo(values,type1)
+        }
+        catch(err){
+            console.log("")
+        }
+
+        
         
     }
     const formik = useFormik({
@@ -33,7 +58,10 @@ const TaskForm = (props) => {
         
     })
 
-   
+    const override = css`
+    display: block;
+    margin: 0 auto;
+  `;
 
     const cancelButtonHandler = () => {
         props.cancelButton(type1)
@@ -53,7 +81,13 @@ const TaskForm = (props) => {
                         onBlur={formik.handleBlur}  className={formik.errors.Title && formik.touched.Title? "input-error" : ""}/>
                         {formik.errors.Title && formik.touched.Title && <p className="error">{formik.errors.Title}</p>}
                         <br/>
+                        {
+                            type1 !== "Edit" && <button className="primaryButton" onClick={handleAskQuestion}>Auto Generate Description</button>
+                        }
+                        <br/>
+                        
                         <label>Description:</label><br/>
+                        {isLoading && <BeatLoader css={override} />}
                         <textarea id="Description" value={formik.values.Description} rows="6" cols="40"  onChange={formik.handleChange}
                         onBlur={formik.handleBlur}  className={formik.errors.Description && formik.touched.Description? "input-error" : ""}/>
                         {formik.errors.Description && formik.touched.Description && <p className="error">{formik.errors.Description}</p>}
@@ -78,7 +112,6 @@ const TaskForm = (props) => {
                             <button className="primaryButton" onClick={cancelButtonHandler}>Cancel</button>
                         </div>
                         
-            
                 </form>
             </div>
         </div>

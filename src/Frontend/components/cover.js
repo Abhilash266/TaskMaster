@@ -114,8 +114,14 @@ const Cover = (props) => {
                 { 
                     isChecked && taskState == "Pending" &&
                     <>
+                    {
+                        props.container === "Dashboard" ? <button className="btn btn-sm btn-danger" onClick={deleteHandler}>Delete</button> :
+                        <>
                         <button className="btn btn-sm btn-primary" onClick={editHandler}>Edit</button>
                         <button className="btn btn-sm btn-danger" onClick={deleteHandler}>Delete</button> 
+                        </>
+                    }
+                        
                     </>
 
                 }

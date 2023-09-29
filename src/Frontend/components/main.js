@@ -20,7 +20,7 @@ import LoginForm from "./Forms/login";
 
 
 const Main = () => {
-    const isMobile = window.innerWidth <= 800;
+    const isMobile = window.innerWidth <= 700;
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [signup, setSignUp] = useState(true)
     const [name, setName] = useState("")
