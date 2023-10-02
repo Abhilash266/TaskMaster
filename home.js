@@ -21,6 +21,7 @@ const jwt = require('jsonwebtoken');
 const secretKey = process.env.SECRET_KEY;
 
 
+
 app.get('/api/getData', async(req, res) => {
         const data = await fetchData();
         res.json(data)
@@ -63,10 +64,13 @@ app.delete('/api/deleteData/:id',(req, res)=>{
 
 app.put('/api/updateUserData/:id',(req, res) => {
   
+  
   const ID = req.params.id
   const image = req.body.Image
   updateUserData(ID,image)
-  res.send("Data Updated Successfully")
+  res.json({
+    message: 'File uploaded successfully'
+  });
 })
 
 app.get('/api/getUserData/:id',(req, res) => {

@@ -324,7 +324,7 @@ const Home = (props) => {
                     </div> 
                     :
                     <DragDropContext onDragEnd={handleDragEnd}>
-                      <div className={`${toggleBar ? 'col-lg-6 col-md-6 col-sm-3' : 'col-lg-6 col-md-6 col-sm-3'}`}>
+                      <div className={`${toggleBar ? 'col-lg-6 col-md-6 col-sm-6' : 'col-lg-6 col-md-6 col-sm-6'}`}>
                         <div className={`${themeToggle ? 'pendingTasksContainerLight' : 'pendingTasksContainer'}`}>
                         <h3 style={{textAlign:"center"}}>Pending Tasks</h3>
                         <Droppable droppableId="1">
@@ -358,7 +358,7 @@ const Home = (props) => {
 
 
                       
-                      <div className={`${toggleBar ? 'col-lg-6 col-md-6 col-sm-3' : 'col-lg-6 col-md-6 col-sm-3'}`}>
+                      <div className={`${toggleBar ? 'col-lg-6 col-md-6 col-sm-6' : 'col-lg-6 col-md-6 col-sm-6'}`}>
                       
                       
                       <div className={`${themeToggle ? 'completedTasksContainerLight' : 'completedTasksContainer'}`}>

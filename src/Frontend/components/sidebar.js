@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../Styles/style.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faArrowRight, faPencilAlt, faTasks, faHome, faCog, faSignOutAlt, faToggleOn, faToggleOff } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faArrowRight, faPencilAlt, faTasks, faHome, faCog, faSignOutAlt, faToggleOn, faToggleOff, faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -75,9 +75,9 @@ const Sidebar = (props) => {
                 {isActive ? <FontAwesomeIcon className="icon" icon={faCog}/> : "Settings"}
             </button>
             
-            
-            <button className={selectedButton == "button7" ? `${themeToggle ? 'selectedButtonLight' : 'selectedButton'}` : "button7"} id={`${themeToggle ? 'primaryButtonLight' : 'primaryButton'}`} onClick={toggleHandler}>
-                {themeToggle ? <FontAwesomeIcon className="iconToggle" icon={faToggleOn}/> : <FontAwesomeIcon className="iconToggle" icon={faToggleOff}/>}
+           
+            <button className="button7" id={`${themeToggle ? 'primaryButtonLight' : 'primaryButton'}`} onClick={toggleHandler}>
+                {themeToggle ? <FontAwesomeIcon className="icon" icon={faMoon}/> : <FontAwesomeIcon className="icon" icon={faSun}/>}
             </button>
 
             <button className={`button6${isActive ? 'active' : ''}`} id={`${themeToggle ? 'primaryButtonLight' : 'primaryButton'}`} onClick={signOutHandler}>
